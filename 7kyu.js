@@ -1,5 +1,6 @@
-// List Filtering
+log = console.log
 
+// List Filtering
 //In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out.
 
 function filter_list(l) {
@@ -7,9 +8,7 @@ function filter_list(l) {
   }
 
 // Credit Card Mask
-
-//Usually when you buy something, you're asked whether your credit card number, phone number or answer to your most secret question is still correct. However, since someone could look over your shoulder, you don't want that shown on your screen. Instead, we mask it.
-//Your task is to write a function maskify, which changes all but the last four characters into '#'.
+//Usually when you buy something, you're asked whether your credit card number, phone number or answer to your most secret question is still correct. However, since someone could look over your shoulder, you don't want that shown on your screen. Instead, we mask it. Your task is to write a function maskify, which changes all but the last four characters into '#'.
 
 function maskify(cc) {
     let sliced = cc.split('')
@@ -25,10 +24,7 @@ function maskify(cc) {
   }
 
 // Vowel Count
-
-//Return the number (count) of vowels in the given string.
-// We will consider a, e, i, o, u as vowels for this Kata (but not y).
-// The input string will only consist of lower case letters and/or spaces.
+// Return the number (count) of vowels in the given string. We will consider a, e, i, o, u as vowels for this Kata (but not y). The input string will only consist of lower case letters and/or spaces.
 
 function getCount(str) {
     var vowelsCount = 0;
@@ -45,10 +41,7 @@ function getCount(str) {
   }
 
 // Disemvowel Trolls
-// Trolls are attacking your comment section!
-// A common way to deal with this situation is to remove all of the vowels from the trolls' comments, neutralizing the threat.
-// Your task is to write a function that takes a string and return a new string with all vowels removed.
-// For example, the string "This website is for losers LOL!" would become "Ths wbst s fr lsrs LL!".
+// Trolls are attacking your comment section! A common way to deal with this situation is to remove all of the vowels from the trolls' comments, neutralizing the threat. Your task is to write a function that takes a string and return a new string with all vowels removed. For example, the string "This website is for losers LOL!" would become "Ths wbst s fr lsrs LL!".
 // Note: for this kata y isn't considered a vowel.
 
 function disemvowel(str) {
@@ -62,7 +55,6 @@ function disemvowel(str) {
 }
 
 // Sort Numbers
-
 //Finish the solution so that it sorts the passed in array of numbers. If the function passes in an empty array or null/nil value then it should return an empty array.
 
 function solution(nums){
@@ -74,13 +66,9 @@ function solution(nums){
 }
 
 
-// 'x' marks the spot.
-// #'x' marks the spot
+// 'x' marks the spot
 // ##Task:
-// Given a two dimensional array, return the co-ordinates of 'x'.
-// If 'x' is not inside the array, or if 'x' appears multiple times, return []
-// The co-ordinates should be zero indexed.
-// You should assume you will always get an array as input. The array will only contain 'x's and 'o's.
+// Given a two dimensional array, return the co-ordinates of 'x'. If 'x' is not inside the array, or if 'x' appears multiple times, return []. The co-ordinates should be zero indexed. You should assume you will always get an array as input. The array will only contain 'x's and 'o's.
 
 const xMarksTheSpot = (input) => {
   let cords=[]
@@ -101,4 +89,18 @@ const xMarksTheSpot = (input) => {
   } else {
     return cords
   }
+}
+
+// Filter unused digits
+// Given a varying number of integer arguments, return the digits that are not present in any of them.
+
+function unusedDigits() {
+  let joined = Object.values(arguments).join('')
+  let output = []
+  for (let i=0; i<=9; i++) {
+    if (!joined.includes(i)) {
+      output.push(i)
+    }
+  }
+  return output.join('')
 }
