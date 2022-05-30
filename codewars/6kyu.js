@@ -118,3 +118,41 @@ function countSmileys(arr) {
     let pattern = /[:;][-~]{0,1}[)D]/g  
     return arr.map(x => x.match(pattern)).filter(x => x!=null).length
 }
+
+
+// 05.30.22
+
+// There is an array with some numbers. All numbers are equal except for one. Try to find it!
+
+function findUniq(arr) {
+    let arrShort = arr.slice(0,3)
+    let unique = [...new Set(arr)]
+    let filtered = arrShort.filter(x => x == unique[0])
+    if (filtered.length > 1) {
+      return unique[1]
+    }
+    else {
+      return unique[0]
+    }
+  }
+
+//   You probably know the "like" system from Facebook and other pages. People can "like" blog posts, pictures or other items. We want to create the text that should be displayed next to such an item.
+
+function likes(names) {
+    if (names.length == 0) {
+        return 'no one likes this'
+    }
+    else if (names.length == 1) {
+        return names.join(' and ') + ' likes this'
+    }
+    else if (names.length == 2) {
+        return names.join(' and ') + ' like this'
+    }
+    else if (names.length == 3) {
+        return names.slice(0,2).join(', ') + ' and ' + names.slice(-1) + ' like this'
+    }
+    else {
+        return names.slice(0,2).join(', ') + ` and ${names.slice(2).length} others like this`
+    }
+
+}
