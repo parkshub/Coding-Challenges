@@ -129,3 +129,27 @@ function longest(s1, s2) {
   s = s.split('').filter((x, i, arr) => arr.indexOf(x)==i).sort().join('')
   return s
 }
+
+
+// 05.30.22
+
+// This time no story, no theory. The examples below show you how to write function accum:
+// Examples:
+// accum("abcd") -> "A-Bb-Ccc-Dddd"
+// accum("RqaEzty") -> "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
+// accum("cwAt") -> "C-Ww-Aaa-Tttt"
+
+function accum(s) {
+  let a = s.split('')
+  a.forEach((x,i) => {
+    a[i] = x.toUpperCase() + x.toLowerCase().repeat(i)
+  })
+  return a.join('-')
+}
+
+
+// Simple, given a string of words, return the length of the shortest word(s).
+
+function findShort(s){
+  return s.split(' ').sort((a,b) => a.length - b.length)[0].length
+}

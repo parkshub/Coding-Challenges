@@ -24,6 +24,6 @@ function dirReduc(arr) {
     return arr
 }
 
-log(dirReduc(['NORTH', 'WEST', 'EAST', 'SOUTH', 'EAST', 'NORTH']))
+// log(dirReduc(['NORTH', 'WEST', 'EAST', 'SOUTH', 'EAST', 'NORTH']))
 
 // could not solve

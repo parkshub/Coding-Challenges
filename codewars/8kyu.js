@@ -61,3 +61,12 @@ function solution(a, b){
 function makeNegative(num) {
   return num>0? -num: num
 }
+
+
+// 05.30.22
+
+// We need a function that can transform a number into a string.
+
+function numberToString(num) {
+  return String(num)
+}
