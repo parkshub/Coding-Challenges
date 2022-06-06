@@ -154,3 +154,27 @@ function findShort(s){
   return s.split(' ').sort((a,b) => a.length - b.length)[0].length
 }
 
+
+// 06.06.22
+
+// Deoxyribonucleic acid (DNA) is a chemical found in the nucleus of cells and carries the "instructions" for the development and functioning of living organisms.
+// In DNA strings, symbols "A" and "T" are complements of each other, as "C" and "G". You function receives one side of the DNA (string, except for Haskell); you need to return the other complementary side. DNA strand is never empty or there is no DNA at all (again, except for Haskell).
+
+function DNAStrand(dna){
+  dna = dna.split('').map(x => {
+    if (x == 'A') {
+      return 'T'
+    }
+    else if (x =='T') {
+      return 'A'
+    }
+    else if (x == 'G') {
+      return 'C'
+    }
+    else {
+      return 'G'
+    }
+  })
+  return dna.join('')
+}
+
