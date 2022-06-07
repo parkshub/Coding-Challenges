@@ -85,3 +85,26 @@ function find_average(array) {
     }
   return array.reduce((prev, cur) => prev + cur ,0) / array.length
 }
+
+
+// 06.07.22
+
+class SmallestIntegerFinder {
+  findSmallestInt(args) {
+    return args.reduce((p, c) => Math.min(p, c))
+  }
+}
+
+
+// Can you find the needle in the haystack?
+// Write a function findNeedle() that takes an array full of junk but containing one "needle"
+
+function findNeedle(haystack) {
+  let find = haystack.findIndex(x => x=='needle')
+  if (find != -1){
+    return `found the needle at position ${find}`
+    }
+  else {
+    return "Your function didn't return anything"
+  }
+}

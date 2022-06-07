@@ -178,3 +178,23 @@ function DNAStrand(dna){
   return dna.join('')
 }
 
+
+// 06.07.22
+
+// In this little assignment you are given a string of space separated numbers, and have to return the highest and lowest number.
+
+function highAndLow(numbers){
+  let split = numbers.split(' ')
+  return `${Math.max(...split)} ${Math.min(...split)}`
+}
+
+
+// Given a list of integers, determine whether the sum of its elements is odd or even. Give your answer as a string matching "odd" or "even". If the input array is empty consider it as: [0] (array with a zero).
+
+function oddOrEven(array) {
+  let sum = array.reduce((p,c) => p + c, 0)
+  if (sum%2 == 0 || sum == 0) {
+    return 'even'
+  }
+ return 'odd'
+}
