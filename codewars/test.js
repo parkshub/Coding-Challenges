@@ -1,7 +1,7 @@
 let count = 0
 function persistence(num) {
   
-  console.log(num)
+//   console.log(num)
   
   let val = String(num).split('')
   
@@ -15,7 +15,7 @@ function persistence(num) {
     return prev * cur
   })
   
-  console.log(count, val)
+//   console.log(count, val)
   
   return persistence(val)
   
