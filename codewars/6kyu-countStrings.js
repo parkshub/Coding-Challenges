@@ -3,7 +3,7 @@
 // What if the string is empty? Then the result should be empty object literal, {}.
 
 function count (string) {  
-    let answer = [...string].reduce((prev, cur) => {
+    return [...string].reduce((prev, cur) => {
         if (!prev[String(cur)]) {
             prev[String(cur)] = 1
             return prev
@@ -12,5 +12,4 @@ function count (string) {
             return prev
       }
     }, {})
-    return answer
 }
