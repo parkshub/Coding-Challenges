@@ -1,22 +1,45 @@
-log = console.log
+//Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
+// Any live cell with more than three live neighbours dies, as if by overcrowding.
+// Any live cell with two or three live neighbours lives on to the next generation.
+// Any dead cell with exactly three live neighbours becomes a live cell.
 
-nums = [1,2,3,4]
+p = console.log
 
-// log(nums.slice(1))
-// log(nums.indexOf(3))
+let a = [[1,0,0],
+        [0,1,1],
+        [1,1,0]]
 
-function twosum(nums, target) {
-  for (let i=0; i<nums.length-1; i++) {
-    let numsSlice = nums.slice(i)
-    for (let j=1; j<=numsSlice.length; j++) {
-      if(numsSlice[0] + numsSlice[j]==target) {
-        return [nums.indexOf(numsSlice[0]),nums.indexOf(numsSlice[j])]
+
+let b = [[0,0,0]].concat(JSON.parse(JSON.stringify(a))).concat([[0,0,0]])
+let c = JSON.parse(JSON.stringify(a))
+
+
+let val = 0
+let neighbours = []
+for (let i=1; i<b.length-1; i++) {
+  for (let j=0; j<b[i].length; j++) {
+    neighbours = []
+    // console.log('value is ' + b[i][j])
+        
+    for (let ii=-1; ii<2; ii++) {//getting neighbours values
+      for (let jj=-1; jj<2; jj++){
+          val = b[i+ii][j+jj] || 0 
+          // console.log(`coords ${i+ii} and ${j+jj}`)
+          // console.log('val ' + val)
+          neighbours.push(val)
+        }
       }
+
+    let det = neighbours.reduce((add1,add2) => {return add1+add2})
+    // console.log(neighbours)
+    // console.log('det' + det)
+    
+    if (b[i][j]==1 & (det-1 < 2 || det-1 > 3)) {
+      c[i-1][j] = 0 //change this to match
+    }
+    else if (b[i][j]==0 & det ==3) {
+      c[i-1][j] = 1
     }
   }
 }
-
-console.log(twosum([1,3,2,4], 7))
-
-// let a = nums.slice(2)
-// log(nums.slice(2),a)
+p(c)
