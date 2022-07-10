@@ -1,3 +1,5 @@
+p = console.log
+
 // 07.07.22
 
 var twoSum = function(nums, target) {
@@ -10,3 +12,6 @@ var twoSum = function(nums, target) {
       }
     }
   };
+
+
+// 07.10.22
