@@ -55,3 +55,58 @@ var reverseOnlyLetters = function(s) {
 var isPalindrome = function(x) {
   return [...String(x)].reverse().join('') == String(x)
 };
+
+// 07.15.22
+
+//#4
+ var isValid = function(s) {
+  if (s.length%2 !== 0) {
+      return false
+  }
+  
+  let stack = []
+  
+  for (let i of s) {
+      if (i == ')' && stack[stack.length-1] == '(') {
+          stack.pop()
+      }
+      else if (i == '}' && stack[stack.length-1] == '{') {
+          stack.pop()
+      }
+      else if (i == ']' && stack[stack.length-1] == '[') {
+          stack.pop()
+      }   
+      else if (i == ')' || i == '}' || i == ']') {
+          return false
+      }
+      else {
+          stack.push(i)
+      }
+  }
+  return stack.length == 0
+};
+
+//#5
+var mergeTwoLists = function(list1, list2) {
+    
+  let arr = []
+      
+  while (list1) {
+      arr.push(list1.val)        
+      list1 = list1.next
+  }
+  
+  while (list2) {
+      arr.push(list2.val)        
+      list2 = list2.next
+  }
+  
+  arr.sort((a,b) => b-a)
+  let answer = arr.reduce((prev, cur) => {
+      let temp = {}
+      temp.val = cur
+      temp.next = prev
+      return temp
+  }, null)
+  return answer    
+};
