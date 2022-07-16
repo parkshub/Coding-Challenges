@@ -110,3 +110,39 @@ var mergeTwoLists = function(list1, list2) {
   }, null)
   return answer    
 };
+
+// #6
+var longestCommonPrefix = function(strs) {
+  let arr = []
+
+  strs.sort((a, b)=> a.length-b.length)
+
+  let shortest = strs[0]
+
+  for (let i = 0; i<shortest.length; i++) {
+    let temp = shortest[i]  
+    if (strs.every(x => x[i]==temp)) {
+      arr.push(temp)
+    } else {
+        break
+    }
+  }
+  return arr.join('')
+};
+
+// 07.16.22
+
+// #7
+var removeDuplicates = function(nums) {
+  numsLen = nums.length-1
+  for (let i=numsLen; i>0; i--) {
+      if(nums.lastIndexOf(nums[i])!=nums.indexOf(nums[i])) {
+          nums.splice(i,1)
+      }
+  }
+};
+
+//#8
+var reverseString = function(s) {
+  return s.reverse()
+};
