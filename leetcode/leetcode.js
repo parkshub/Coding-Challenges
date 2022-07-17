@@ -164,3 +164,9 @@ function twoSum(arr, tar) {
     }
     return []
 }
+
+//#10 
+var lengthOfLastWord = function(s) {
+  let c = s.split(' ').filter(x => x)
+  return c[c.length-1].length
+};
