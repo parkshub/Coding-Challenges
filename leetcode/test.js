@@ -1,5 +1,3 @@
-let a = ['a', 'b', 'c']
+let a = 'apple'
 
-a.reverse()
-
-console.log(a)
+console.log(a.split('').reverse().join(''))
