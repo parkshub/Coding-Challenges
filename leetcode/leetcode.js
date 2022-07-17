@@ -146,3 +146,21 @@ var removeDuplicates = function(nums) {
 var reverseString = function(s) {
   return s.reverse()
 };
+
+// 07.17.22
+
+//#9
+// twoSum better method
+
+function twoSum(arr, tar) {
+    let cache = {}
+    for (let i = 0; i<arr.length; i++) {
+        let remain = tar - arr[i]
+        if (arr[i] in cache) {
+            return [cache[arr[i]], i]
+        } else {
+            cache[remain] = i
+        }
+    }
+    return []
+}
