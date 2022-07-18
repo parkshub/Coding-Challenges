@@ -170,3 +170,17 @@ var lengthOfLastWord = function(s) {
   let c = s.split(' ').filter(x => x)
   return c[c.length-1].length
 };
+
+
+console.log(twoSum([1,1,1,1,2,3], 5))
+
+// 07.18.22
+//#11
+
+var merge = function(nums1, m, nums2, n) {
+  for (let i=m; i<nums1.length; i++){
+      n--
+      nums1[i] = nums2[n]
+  }
+  return nums1.sort((a,b) => a-b)
+};
