@@ -171,10 +171,8 @@ var lengthOfLastWord = function(s) {
   return c[c.length-1].length
 };
 
-
-console.log(twoSum([1,1,1,1,2,3], 5))
-
 // 07.18.22
+
 //#11
 
 var merge = function(nums1, m, nums2, n) {
@@ -184,3 +182,66 @@ var merge = function(nums1, m, nums2, n) {
   }
   return nums1.sort((a,b) => a-b)
 };
+
+// 07.19.22
+
+//#12
+
+var climbStairsV1 = function(n) {
+  let dp = []
+  dp[0] = 1
+  dp[1] = 2
+  
+  for (let i = 2; i<n; i++) {
+    dp[i] = dp[i-1] + dp[i-2]
+  }
+  return dp[n-1]
+};
+
+var climbStairsV2 = function(n, memo = new Array()) {
+  if (n === 2) {return 2}
+  if (n === 1) {return 1}
+  if (memo[n]) {return memo[n]}
+
+  let res = climbStairsV2(n-1, memo) + climbStairsV2(n-2, memo)
+  memo[n] = res
+  return res
+};
+
+
+// Binary Tree Practice
+
+class Node {
+  constructor(root) {
+    this.val = root
+    this.left = null
+    this.right = null
+  }
+}
+
+let a = new Node('a')
+let b = new Node('b')
+let c = new Node('c')
+let d = new Node('d')
+let e = new Node('e')
+let f = new Node('f')
+
+a.left = b
+b.left = d
+b.right = e
+c.right = f
+
+
+stack = [a]
+
+while(stack.length > 0) {
+  cur = stack.pop()
+  
+  if(cur.right) {
+    stack.push(cur.right)
+  }
+  if(cur.left) {
+    stack.push(cur.left)
+  }
+  console.log(cur.val)
+}
