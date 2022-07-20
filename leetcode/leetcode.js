@@ -16,7 +16,7 @@ var twoSum = function(nums, target) {
 
 // 07.11.22
 
-//#1
+// #1
 var minCostClimbingStairs = function(cost) {
   const costLength = cost.length
   for (let i=2; i<costLength; i++) {
@@ -25,7 +25,7 @@ var minCostClimbingStairs = function(cost) {
   return Math.min(cost[costLength-1], cost[costLength-2])
 };
 
-//#2
+// #2
 var reverseOnlyLetters = function(s) {
   let letters = s.match(/[a-z]/gi)
   let lettersReversed = []
@@ -51,14 +51,14 @@ var reverseOnlyLetters = function(s) {
   return answer.join('')
 };
 
-//#3
+// #3
 var isPalindrome = function(x) {
   return [...String(x)].reverse().join('') == String(x)
 };
 
 // 07.15.22
 
-//#4
+// #4
  var isValid = function(s) {
   if (s.length%2 !== 0) {
       return false
@@ -86,7 +86,7 @@ var isPalindrome = function(x) {
   return stack.length == 0
 };
 
-//#5
+// #5
 var mergeTwoLists = function(list1, list2) {
     
   let arr = []
@@ -142,14 +142,14 @@ var removeDuplicates = function(nums) {
   }
 };
 
-//#8
+// #8
 var reverseString = function(s) {
   return s.reverse()
 };
 
 // 07.17.22
 
-//#9
+// #9
 // twoSum better method
 
 function twoSum(arr, tar) {
@@ -165,7 +165,7 @@ function twoSum(arr, tar) {
     return []
 }
 
-//#10 
+// #10 
 var lengthOfLastWord = function(s) {
   let c = s.split(' ').filter(x => x)
   return c[c.length-1].length
@@ -173,7 +173,7 @@ var lengthOfLastWord = function(s) {
 
 // 07.18.22
 
-//#11
+// #11
 
 var merge = function(nums1, m, nums2, n) {
   for (let i=m; i<nums1.length; i++){
@@ -185,7 +185,7 @@ var merge = function(nums1, m, nums2, n) {
 
 // 07.19.22
 
-//#12
+// #12
 
 var climbStairsV1 = function(n) {
   let dp = []
@@ -245,3 +245,16 @@ while(stack.length > 0) {
   }
   console.log(cur.val)
 }
+
+// 07.20.22
+// #13
+
+var inorderTraversal = function(root, arr = new Array()) {
+  if (root === null) {return []}
+  
+  inorderTraversal(root.left, arr)
+  arr.push(root.val)
+  inorderTraversal(root.right, arr)
+  
+  return arr
+};
