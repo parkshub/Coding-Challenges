@@ -151,7 +151,6 @@ var reverseString = function(s) {
 
 // #9
 // twoSum better method
-
 function twoSum(arr, tar) {
     let cache = {}
     for (let i = 0; i<arr.length; i++) {
@@ -174,7 +173,6 @@ var lengthOfLastWord = function(s) {
 // 07.18.22
 
 // #11
-
 var merge = function(nums1, m, nums2, n) {
   for (let i=m; i<nums1.length; i++){
       n--
@@ -247,8 +245,8 @@ while(stack.length > 0) {
 }
 
 // 07.20.22
-// #13
 
+// #13
 var inorderTraversal = function(root, arr = new Array()) {
   if (root === null) {return []}
   
@@ -258,3 +256,16 @@ var inorderTraversal = function(root, arr = new Array()) {
   
   return arr
 };
+
+// 07.21.22
+
+// #14
+var preorderTraversal = function(root, arr = new Array()) {
+  if (root === null) {return []}
+  
+  arr.push(root.val)
+  preorderTraversal(root.left, arr)
+  preorderTraversal(root.right, arr)
+  
+  return arr
+}
