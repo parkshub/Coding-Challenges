@@ -229,6 +229,13 @@ b.left = d
 b.right = e
 c.right = f
 
+//      a
+//     / \
+//    b   c
+//   /\    \
+//  d  e    f 
+
+// depth first order = a,b,d,e,c,f
 
 stack = [a]
 
@@ -257,6 +264,8 @@ var inorderTraversal = function(root, arr = new Array()) {
   return arr
 };
 
+console.log(inorderTraversal(a))
+
 // 07.21.22
 
 // #14
@@ -268,4 +277,83 @@ var preorderTraversal = function(root, arr = new Array()) {
   preorderTraversal(root.right, arr)
   
   return arr
+}
+
+// 07.23.22
+
+// #15
+// inorder different method
+
+var inorderTraversal = function(root) {
+    
+  // left root right
+  // 4,2,5,1,3
+  
+  let stack = []
+  let res = []
+  
+  while (root || stack.length > 0) {
+      if (root) {
+          stack.push(root)
+          root = root.left
+      }
+      else {
+          root = stack.pop()
+          res.push(root.val)
+          root = root.right
+      }
+  }
+  return res
+};
+
+
+// #16
+// postorder traversal iteration
+
+var postorderTraversal = function(root) {
+  if (root === null) return [];
+  
+  let stack = [root]
+  let res = []
+  
+  while (stack.length > 0) {
+      root = stack.pop()
+      
+      
+      if(root.left !== null) {
+          stack.push(root.left)
+      }
+      
+      if (root.right !== null) {
+          stack.push(root.right)
+      }
+      
+      res.push(root.val)
+  }
+  return res.reverse()
+};
+
+// #17
+// preorder iteration
+
+var preorderTraversal = function(root) {
+    
+  if (root === null) return [];
+  
+  let stack = [root]
+  let res = []
+  
+  while (stack.length > 0) {
+      
+      root = stack.pop()
+      res.push(root.val)
+      
+      if (root.right) {
+          stack.push(root.right)
+      }
+      if (root.left) {
+          stack.push(root.left)
+      }
+  }
+  return res
 }
