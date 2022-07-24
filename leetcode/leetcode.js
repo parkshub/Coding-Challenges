@@ -369,3 +369,32 @@ var postorderTraversal = function(root, arr = new Array()) {
       
       return arr
   };
+
+// 07.24.22
+
+// #19
+
+var isSameTree = function(p, q) {
+    
+  let stack = [p, q]
+  
+  while (stack.length) {
+      
+      q = stack.pop()
+      p = stack.pop()
+      
+      if (!p && !q) continue;
+      if (!p || !q) return false;
+      
+      if (p.val === q.val) {
+          stack.push(p.left)
+          stack.push(q.left)
+          stack.push(p.right)
+          stack.push(q.right)
+      }
+      else {
+          return false
+      }
+  }
+  return true
+}
