@@ -398,3 +398,37 @@ var isSameTree = function(p, q) {
   }
   return true
 }
+
+// 07.25.22
+
+// #20
+
+var isSymmetric = function(root) {
+    
+  function isEqual(rootL, rootR) {
+      if (!rootL && !rootR) return true;
+      if (!rootL || !rootR) return false;
+      return rootL.val === rootR.val && isEqual(rootL.left,rootR.right) && isEqual(rootL.right,rootR.left)
+  }
+
+  return isEqual(root.left, root.right)
+};
+
+// #21
+
+var isSymmetric = function(root) {
+    
+  let stack = [root.left, root.right]
+  
+  while(stack.length) {
+      rootR = stack.pop()
+      rootL = stack.pop()
+      
+      if (!rootR && !rootL) continue;
+      if (!rootR || !rootL) return false;
+      if (rootR.val !== rootL.val) return false
+      
+      stack.push(rootR.left, rootL.right, rootR.right, rootL.left)
+  }
+  return true
+};
