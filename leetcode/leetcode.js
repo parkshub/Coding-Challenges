@@ -448,3 +448,59 @@ var isSameTree = function(p, q) {
   
   return help(p,q)
 }
+
+// 07.26.22
+// #23
+// same tree iteration, better method
+
+var isSameTree = function(p, q) {
+    
+  let stack = [p,q]
+  
+  while (stack.length) {
+      node1 = stack.pop()
+      node2 = stack.pop()
+      
+      if (!node1 && !node2) continue;
+      if (!node1 || !node2) return false;
+      if (node1.val !== node2.val) return false;
+      
+      stack.push(node1.left, node2.left, node1.right, node2.right)
+  }
+  return true
+}
+
+// #24
+
+var levelOrder = function(root) {
+  if (root === null) return [];
+  
+  let q = [root]
+  let arr = []
+  
+  while (q.length) {
+      let temp = []
+      let qLen = q.length
+      
+      for (let i = 0; i < qLen; i++) {
+          root = q.shift()
+          temp.push(root.val)
+          if (root.left) q.push(root.left);
+          if (root.right) q.push(root.right);
+      }
+      arr.push(temp)
+  }
+  return arr
+};
+
+
+// #25
+
+var maxDepth = function(root) {
+  if (root === null) return 0;
+  
+  let left = maxDepth(root.left)
+  let right = maxDepth(root.right)
+  
+  return Math.max(left, right) + 1
+};
