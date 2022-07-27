@@ -6,12 +6,12 @@ class Node {
     }
   }
   
-  let a = new Node(5)
-  let b = new Node(11)
-  let c = new Node(3)
-  let d = new Node(4)
-  let e = new Node(2)
-  let f = new Node(1)
+  let a = new Node(2)
+  let b = new Node(4)
+  let c = new Node(1)
+  let d = new Node(3)
+  let e = new Node(6)
+  let f = new Node(2)
   
   a.left = b
   a.right = c
@@ -32,11 +32,17 @@ class Node {
 //       3   6   2
 
 function maxRootPathV1(root) {
-
+    if (root === null) return 0;
+    let larger = Math.max(maxRootPathV1(root.left), maxRootPathV1(root.right))
+    return larger + root.val
 }
 
-console.log(maxRootPathV1(a))
-
+function maxRootPathV2(root) {
+    if (root === null) return 0;
+    let left = maxRootPathV1(root.left)
+    let right = maxRootPathV1(root.right)
+    return Math.max(root.val + left, root.val + right)
+}
 
 
 function treeMinV1(root) {
