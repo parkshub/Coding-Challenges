@@ -1,5 +1,3 @@
-let a = '()()()()'
+let a = 114
 
-for (let i of a) {
-    console.log(i)
-}
+console.log(Math.sqrt(a))
