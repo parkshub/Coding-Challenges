@@ -8,9 +8,6 @@ let answer = x.split(' ').map(word => word.split('').reduce((prev, curr) => {
     return prev + arr.indexOf(curr) + 1
 },0))
 
-
 let idx = answer.indexOf(Math.max(...answer))
-
-console.log(answer,idx)
 
 console.log(x.split(' ')[idx])
