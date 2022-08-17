@@ -1,3 +1,3 @@
-let a = 'string'
+let a = 0
 
-console.log(a[0])
+console.log(a >= 0)
