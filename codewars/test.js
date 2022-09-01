@@ -1,12 +1,6 @@
-let b = 'Cooool'
-console.log(b.toLocaleLowerCase())
+let a = 'Cooool'
+let b = 'ool'
 
-let a = ['a', 'b', 'c', 'a']
+console.log(a.includes(b))
 
-console.log(b.match(/o/g))
-
-let c = a.filter(x => x=='a')
-
-console.log(a.every(x => x!='a'))
-
-a.las
+a.loca
