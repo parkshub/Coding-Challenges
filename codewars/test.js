@@ -1,7 +1,13 @@
-p = console.log
+let arr = [ 1, 2, 1, 1, 3, 1, 0, 0, 0, 0 ]
 
-let a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+arr.filter(x => x==0)
+console.log(arr)
 
-p(a.slice(0,3))
-p(a.slice(3,6))
-p(a.slice(6))
+function moveZeros(arr) {
+    let nonZeros = arr.filter(x => x!=0)
+    let zeros = arr.filter(x => x==0)
+    let res = nonZeros.concat(zeros)
+    console.log(res)
+  }
+
+// moveZeros(arr)
