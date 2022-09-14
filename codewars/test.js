@@ -1,2 +1,2 @@
-let a = 2
-console.log(a%2)
+let a = 'str'
+console.log(a.length)
