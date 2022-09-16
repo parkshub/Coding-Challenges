@@ -1,23 +1,31 @@
-p = console.log
+let s = [4, 3, 2]
+let t = []
 
-// let road = '>.>..<' // 8
-let road = '.><.>>.<<' // 11
-// let road = '.>>>' // 0
+let i = 0
+let j = s.length-1
+let temp;
+while (t.length != s.length) {
 
-let cam = 0
-let res = 0
-let right = 0
 
-for (let i = 0; i<road.length; i++) {
-    if (road[i] === '.') {
-        result += right          
-        cam += 1
-    }
-    else if (road[i] === '<') {
-        result += cam
+    t.push(s[i])
+    t.push(s[j])
+
+    if (t.length > s.length) {
+        t.pop()
+        break
     }
 
-    else if (road[i] === '>') {
-        right += 1
+    if(i < j) {
+        i++
+        j--
     }
+    else if (j < i) {
+        j++
+        i--
+    }
+    temp = i
+    i = j
+    j = temp
 }
+
+console.log(t)
