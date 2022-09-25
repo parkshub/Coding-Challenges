@@ -1,18 +1,23 @@
 p = console.log
-let array = ['O','Q','R','S']
 
-// let test = array.map(x => x.charCodeAt())
-// p(test)
+// let road = '>.>..<' // 8
+let road = '.><.>>.<<' // 11
+// let road = '.>>>' // 0
 
-let code = array[0].charCodeAt() + 1
+let cam = 0
+let res = 0
+let right = 0
 
-let charCode;
-
-for (let i = 1; i<array.length; i++) {
-    charCode = array[i].charCodeAt()
-
-    if (charCode != code) {
-        console.log(String.fromCharCode(code))
+for (let i = 0; i<road.length; i++) {
+    if (road[i] === '.') {
+        result += right          
+        cam += 1
     }
-    code += 1
+    else if (road[i] === '<') {
+        result += cam
+    }
+
+    else if (road[i] === '>') {
+        right += 1
+    }
 }
