@@ -1,15 +1,18 @@
 p = console.log
-let size = 3
+let array = ['O','Q','R','S']
 
-let a = [...new Array(size)].map(x => new Array(size).fill(0))
+// let test = array.map(x => x.charCodeAt())
+// p(test)
 
-for (let i = 0; i<a.length; i++) {
-    p(i)
-    for (let j = 0; j<a.length; j++) {
-        a[i][j] = (i+1) * (j+1)
+let code = array[0].charCodeAt() + 1
+
+let charCode;
+
+for (let i = 1; i<array.length; i++) {
+    charCode = array[i].charCodeAt()
+
+    if (charCode != code) {
+        console.log(String.fromCharCode(code))
     }
+    code += 1
 }
-
-// a[1][1] = 3
-// p(a[1][1])
-p(a)
