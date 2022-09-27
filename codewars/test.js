@@ -1,31 +1,19 @@
-let s = [4, 3, 2]
-let t = []
+p = console.log
 
-let i = 0
-let j = s.length-1
-let temp;
-while (t.length != s.length) {
+let text = 'uldghwcx wxl ody'
 
+let textSplit = text.split(' ')
+let max = Math.max(...textSplit.map(x => x.length))
 
-    t.push(s[i])
-    t.push(s[j])
+let headFoot = '\*'.repeat(max + 4)
 
-    if (t.length > s.length) {
-        t.pop()
-        break
-    }
+let rvrs = textSplit.map(x => [...x].reverse().join(''))
 
-    if(i < j) {
-        i++
-        j--
-    }
-    else if (j < i) {
-        j++
-        i--
-    }
-    temp = i
-    i = j
-    j = temp
-}
+let starred = rvrs.map(x => `\* ${x}${' '.repeat(max - x.length+1)}\*`)
 
-console.log(t)
+starred.push(headFoot)
+starred.unshift(headFoot)
+
+p(starred.join('\n'))
+
+// p('************\n* xcwhgdlu *\n* lxw      *\n* ydo      *\n************')
