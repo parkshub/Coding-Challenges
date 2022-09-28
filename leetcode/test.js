@@ -1,3 +1,21 @@
-let a = 19
+p = console.log
 
-console.log(String(a) + '0'.repeat(3))
+let str = 'abcde'
+// let str = 'abcde'
+
+let res = []
+
+str.split('')
+
+for(let i=0; i<str.length; i+=2) {
+    if (i === str.length-1 && str.length%2 != 0) {
+        res.push(str[i]+'_')    
+    }
+    else {
+    res.push(str[i]+str[i+1])
+    }
+}
+
+// res[res.length-1] = res[res.length-1].replace('undefined','_')
+
+p(res)
