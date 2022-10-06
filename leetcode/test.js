@@ -10,8 +10,6 @@ let keys = Object.keys(a)
 //     p(a[i] = i.split('').reverse().join(''))
 // }
 
-let b = keys.map(x => {
+keys.forEach(x => {
     a[x] = x.split('').reverse().join('')
 })
-
-p(a)

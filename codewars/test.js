@@ -1,22 +1,8 @@
-// let a = [1, [2, 3], 4, 5, [6, [7]]]
+p = console.log
 
-function flatten() {
-    
-    let args = [...arguments]
-    console.log(args)
+let str = "   "
 
-    return args.reduce((prev, curr) => {
-        if (Array.isArray(curr)) {
-            return prev.concat(flatten(...curr))
-        }
-        return prev.concat(curr)
-    }, [])
+if(!str.trim().length) {
+    p('cool')
 }
 
-// let ans = flatten(1, [2, 3], 4, 5, [6, [7]])
-// console.log(ans)
-// let a = 1
-
-let b = [3,4,5]
-
-console.log(...b)
