@@ -1,15 +1,12 @@
-p = console.log
+var longestCommonPrefix = function(strs) {
+    if (strs.length == 1) { return strs[0] }
+    
+    let shortest = strs.sort((a,b)=> a.length-b.length)[0]
 
-let a = { abc: undefined, arara: undefined }
-
-let keys = Object.keys(a)
-
-
-// for (i of keys) {
-//     p(keys)
-//     p(a[i] = i.split('').reverse().join(''))
-// }
-
-keys.forEach(x => {
-    a[x] = x.split('').reverse().join('')
-})
+    for (let i = shortest.length; i > 0; i--) {
+        if(strs.every(word=> word.substring(0,i).includes(shortest.substring(0,i)))) {
+            return shortest.substring(0,i)
+        }
+    }
+    return ''
+};

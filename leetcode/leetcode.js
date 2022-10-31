@@ -504,3 +504,50 @@ var maxDepth = function(root) {
   
   return Math.max(left, right) + 1
 };
+
+// #### practice
+
+// # loop
+var twoSum = function(nums, target) {
+  for (let i = 0; i < nums.length-1; i++) {
+      for (let j = i+1; j < nums.length; j++) {
+          if (nums[i] + nums[j] === target) {
+              return [i, j]
+          }
+      }
+  }
+};
+
+// # hash
+var twoSum = function(nums, target) {
+  let hash = {}
+
+  for (let i = 0; i < nums.length; i++) {
+      let n = nums[i]
+      if (hash[target-n] !== undefined) {
+          return [hash[target-n], i]
+      }
+      hash[n] = i
+  }
+};
+
+var lengthOfLastWord = function(s) {
+  return s.trim().split(' ').reverse()[0].length
+};
+
+var isPalindrome = function(x) {
+  return String(x).split('').reverse().join('') == String(x)
+};
+
+var longestCommonPrefix = function(strs) { // my best so far
+  if (strs.length == 1) { return strs[0] }
+  
+  let shortest = strs.sort((a,b)=> a.length-b.length)[0]
+
+  for (let i = shortest.length; i > 0; i--) {
+      if(strs.every(word=> word.substring(0,i).includes(shortest.substring(0,i)))) {
+          return shortest.substring(0,i)
+      }
+  }
+  return ''
+};
