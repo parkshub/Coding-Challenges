@@ -248,7 +248,6 @@ while(stack.length > 0) {
   if(cur.left) {
     stack.push(cur.left)
   }
-  console.log(cur.val)
 }
 
 // 07.20.22
@@ -263,8 +262,6 @@ var inorderTraversal = function(root, arr = new Array()) {
   
   return arr
 };
-
-console.log(inorderTraversal(a))
 
 // 07.21.22
 
@@ -551,3 +548,44 @@ var longestCommonPrefix = function(strs) { // my best so far
   }
   return ''
 };
+
+let l1 = {val: 2, next: {val: 4, next: {val: 5, next: {val: 10, next: null}}}}
+let l2 = {val: 1, next: {val: 5, next: {val: 7, next: null}}}
+
+function mergedTwoLists(l1,l2) {
+  head = {val: null , next: null}
+  curr = head
+  while (l1 && l2) {
+    if (l1.val < l2.val) {
+      curr.next = l1
+      l1 = l1.next
+    }
+    else {
+      curr.next = l2
+      l2 = l2.next
+    }
+    curr = curr.next
+  }
+
+  curr.next = l1 || l2
+  return head.next
+}
+
+function mergedTwoListsRecursive(l1, l2) {
+  if (!l1 || !l2) {
+    return l1 || l2
+  }
+  let node = ''
+  if (l1.val < l2.val) {
+    node = l1
+    node.next = mergedTwoListsRecursive(l1.next, l2) 
+  }
+  else {
+    node = l2
+    node.next = mergedTwoListsRecursive(l1, l2.next)
+  }
+
+  return node
+}
+
+console.log(JSON.stringify(mergedTwoListsRecursive(l1,l2)))
