@@ -217,17 +217,17 @@ class Node {
   }
 }
 
-let a = new Node('a')
-let b = new Node('b')
-let c = new Node('c')
-let d = new Node('d')
-let e = new Node('e')
-let f = new Node('f')
+// let a = new Node('a')
+// let b = new Node('b')
+// let c = new Node('c')
+// let d = new Node('d')
+// let e = new Node('e')
+// let f = new Node('f')
 
-a.left = b
-b.left = d
-b.right = e
-c.right = f
+// a.left = b
+// b.left = d
+// b.right = e
+// c.right = f
 
 //      a
 //     / \
@@ -237,18 +237,18 @@ c.right = f
 
 // depth first order = a,b,d,e,c,f
 
-stack = [a]
+// stack = [a]
 
-while(stack.length > 0) {
-  cur = stack.pop()
+// while(stack.length > 0) {
+//   cur = stack.pop()
   
-  if(cur.right) {
-    stack.push(cur.right)
-  }
-  if(cur.left) {
-    stack.push(cur.left)
-  }
-}
+//   if(cur.right) {
+//     stack.push(cur.right)
+//   }
+//   if(cur.left) {
+//     stack.push(cur.left)
+//   }
+// }
 
 // 07.20.22
 
@@ -549,8 +549,8 @@ var longestCommonPrefix = function(strs) { // my best so far
   return ''
 };
 
-let l1 = {val: 2, next: {val: 4, next: {val: 5, next: {val: 10, next: null}}}}
-let l2 = {val: 1, next: {val: 5, next: {val: 7, next: null}}}
+// let l1 = {val: 2, next: {val: 4, next: {val: 5, next: {val: 10, next: null}}}}
+// let l2 = {val: 1, next: {val: 5, next: {val: 7, next: null}}}
 
 function mergedTwoLists(l1,l2) {
   head = {val: null , next: null}
@@ -571,6 +571,9 @@ function mergedTwoLists(l1,l2) {
   return head.next
 }
 
+let l1 = {val: 2, next: {val: 4, next: {val: 5, next: {val: 10, next: null}}}}
+let l2 = {val: 1, next: {val: 5, next: {val: 7, next: null}}}
+
 function mergedTwoListsRecursive(l1, l2) {
   if (!l1 || !l2) {
     return l1 || l2
@@ -588,4 +591,25 @@ function mergedTwoListsRecursive(l1, l2) {
   return node
 }
 
-console.log(JSON.stringify(mergedTwoListsRecursive(l1,l2)))
+// reviewing tree traversal
+
+var preorderTraversal = function(root) {
+  // root left right
+  if (!root) return [];
+  
+  let stack = [root]
+  let arr = []
+ 
+  while (stack.length) {
+      let curr = stack.pop()
+      arr.push(curr.val)
+
+      if (curr.right) {
+          stack.push(curr.right)
+      }
+      if (curr.left) {
+          stack.push(curr.left)
+      }
+  }
+  return arr
+}
