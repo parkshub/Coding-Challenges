@@ -613,3 +613,101 @@ var preorderTraversal = function(root) {
   }
   return arr
 }
+
+var preorderTraversalRecursive = function(root) {
+  //root left right
+
+  let arr = []
+  traverse(root)
+  function traverse(node) {
+      if (!node) return [];
+      arr.push(node.val)
+      traverse(node.left)
+      traverse(node.right)
+  }
+  return arr
+}
+
+var inorderTraversal = function(root) {
+  // left root right
+  // this one is the hardest imo
+  let stack = []
+  let arr = []
+
+  while(stack.length > 0 || root) {
+      if(root) {
+          stack.push(root)
+          root = root.left
+      } else {
+          root = stack.pop()
+          arr.push(root.val)
+          root = root.right
+      }
+  }
+  return arr
+};
+
+var inorderTraversalRecursive = function(root) {//recursive
+    let arr = []
+    function traverse(node) {
+        if(!node) return [];
+        traverse(node.left)
+        arr.push(node.val)
+        traverse(node.right)
+    }
+    traverse(root)
+    return arr
+};
+
+var postorderTraversal = function(root) {
+  // left, right, root
+      if (!root) return [];
+  
+      let stack = [root]
+      let arr = []
+  
+      while(stack.length>0) {
+          let node = stack.pop()
+          arr.unshift(node.val)
+          if(node.left) {
+              stack.push(node.left)
+          }
+          if(node.right) {
+              stack.push(node.right)
+          }
+      }
+      return arr
+  };
+
+var postorderTraversalWithoutUnshift = function(root) {
+  // left, right, root
+      if (!root) return [];
+  
+      let stack = [root]
+      let arr = []
+  
+      while(stack.length>0) {
+          let node = stack.pop()
+          arr.push(node.val)
+          if(node.left) {
+              stack.push(node.left)
+          }
+          if(node.right) {
+              stack.push(node.right)
+          }
+      }
+      return arr.reverse()
+}
+
+var postorderTraversalRecursive = function(root) {
+  // left, right, root
+  let arr = []
+  traverse(root)
+  return arr
+  function traverse(node) {
+      if (!node) return [];
+      traverse(node.left)
+      traverse(node.right)
+      arr.push(node.val)
+  }
+};
