@@ -711,3 +711,29 @@ var postorderTraversalRecursive = function(root) {
       arr.push(node.val)
   }
 };
+
+var isValid = function(s) {
+    
+  if(!s) return false;
+  
+  let cache = {')': '(', ']': '[', '}': '{'}
+  let keys = Object.keys(cache)
+  let values = Object.values(cache)
+
+  let stack = []
+
+  for (let i of s) {
+      if (keys.includes(i) && cache[i] === stack[stack.length-1]) {
+          stack.pop()
+      }
+      else if (values.includes(i)) {
+          stack.push(i)
+      }
+      else {
+          return false
+      }
+  }
+
+  if (stack.length === 0) { return true }
+  return false
+};
