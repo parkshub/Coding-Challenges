@@ -737,3 +737,40 @@ var isValid = function(s) {
   if (stack.length === 0) { return true }
   return false
 };
+
+var climbStairs = function(n) {
+  if (n == 0) return 0
+  if (n == 1) return 1
+  if (n == 2) return 2
+  
+  let arr = new Array(1,2)
+  for (let i = 2; i <= n-1; i++) {
+      arr[i] = arr[i-1] + arr[i-2]
+  }
+
+  return arr[arr.length-1]
+};
+
+var climbStairs = function(n, arr=[]) {
+  if (!n) return 0;
+  if (n == 1) return 1;
+  if (n == 2) return 2;
+  if (arr[n] !== undefined) return arr[n];
+
+  arr[n] = climbStairs(n-1, arr) + climbStairs(n-2, arr)
+
+  return arr[n]
+};
+
+var isPalindrome = function(s) {
+  if (s === null) return false;
+
+  s = s.trim()
+  if (!s) return true;
+  if (s.length == 1) return true;
+
+  s = s.toLowerCase().split('').filter(x => /[A-Za-z0-9]/.test(x))
+  
+  let copy = JSON.parse(JSON.stringify(s))
+  return s.reverse().join('') == copy.join('')
+};
