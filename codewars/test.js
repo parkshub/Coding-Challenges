@@ -1,8 +1,14 @@
-p = console.log
+let a = {'Dude': 1, 'cool': 2, 'something': 3}
 
-let str = "   "
+let b = 'dude'
 
-if(!str.trim().length) {
-    p('cool')
+// console.log(a.dude)
+
+
+function test () {
+    return ([1,2])
 }
 
+let c = test()
+
+console.log(typeof(c))

@@ -774,3 +774,16 @@ var isPalindrome = function(s) {
   let copy = JSON.parse(JSON.stringify(s))
   return s.reverse().join('') == copy.join('')
 };
+
+
+var searchInsert = function(nums, target) {
+  if (target < nums[0]) { return 0 }
+  if (target > nums[nums.length - 1]) { return nums.length }
+
+  let idx = nums.indexOf(target)
+  if (idx !== -1) { return idx }
+
+  for (let i = 0; i < nums.length; i++) {
+      if (nums[i]>=target) { return i }
+  }
+};
