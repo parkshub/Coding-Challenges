@@ -786,3 +786,72 @@ var searchInsert = function(nums, target) {
       if (nums[i]>=target) { return i }
   }
 };
+
+
+var deleteDuplicates = function(head) {
+  if (head === null) return null
+
+  let current = head
+
+  while (current !== null) {
+      while (current.next !== null && current.val === current.next.val) {
+          current.next = current.next.next
+      }
+      current = current.next
+  }
+
+  return head
+};
+
+var singleNumber = function(nums) {
+  if (nums.length == 1) { return nums[0] }
+
+  let cache = {}
+
+  for (let i = 0; i < nums.length; i++) {
+      if (!cache[nums[i]]) {
+          cache[nums[i]] = 1
+      } else {
+          cache[nums[i]] = cache[nums[i]] + 1
+      }
+  }
+
+  let count = Object.values(cache)
+  let idx = count.indexOf(1)
+  
+  return Object.keys(cache)[idx]
+};
+
+var mergeTwoLists = function(list1, list2) {
+  let head = {val: '', next: null}
+  let current = head
+  while (list1 && list2) {
+      if (list1.val < list2.val) {
+          current.next = list1
+          list1 = list1.next
+          console.log(current)
+      } else {
+          current.next = list2
+          list2 = list2.next
+          console.log(current)
+      }
+      current = current.next
+  }
+  current.next = list1 || list2
+
+  return head.next
+};
+
+var deleteDuplicates = function(head) {
+
+  let current = head
+  while (current) {
+      if (current.next !== null && current.val == current.next.val) {
+          current.next = current.next.next
+      } else {
+          current = current.next
+      }
+  }
+
+  return head
+};
