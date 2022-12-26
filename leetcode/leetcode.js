@@ -855,3 +855,17 @@ var deleteDuplicates = function(head) {
 
   return head
 };
+
+var climbStairs = function(n) {
+  if (n === 1) return 1;
+  if (n === 2) return 2;
+  if (n === 3) return 3;
+
+  let arr = [0, 1, 2, 3]
+
+  for (let i = 4; i <= n; i++) {
+      let step = arr[i-1] + arr[i-2]
+      arr.push(step)
+  }
+  return arr[arr.length-1]
+};
