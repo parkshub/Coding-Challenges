@@ -869,3 +869,24 @@ var climbStairs = function(n) {
   }
   return arr[arr.length-1]
 };
+
+var preorderTraversal = function(root) {
+
+  if (root === null) return [];
+  //root left right
+  let stack = [root]
+  let res = []
+
+  while (stack.length > 0) {
+      let node = stack.pop()
+      res.push(node.val)
+      if (node.right) {
+          stack.push(node.right)
+      }
+      if (node.left) {
+          stack.push(node.left)
+      }
+  }
+
+  return res
+}
