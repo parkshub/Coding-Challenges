@@ -18,6 +18,12 @@ var uniqueInOrder=function(iterable){
   return res
 }
 
+function spinWords(string){
+  return string.split(' ').map(x => {
+    return x.length > 4 ? x.split('').reverse().join('') : x
+  }).join(' ')
+}
+
 function smallEnough(a, limit){
   return a.filter(x => x > limit).length === 0
 }
