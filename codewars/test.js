@@ -1,14 +1,6 @@
-let a = {'Dude': 1, 'cool': 2, 'something': 3}
-
-let b = 'dude'
-
-// console.log(a.dude)
+let a = "asdasd"
 
 
-function test () {
-    return ([1,2])
-}
 
-let c = test()
 
-console.log(typeof(c))
+console.log([...a])
