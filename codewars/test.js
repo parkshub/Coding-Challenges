@@ -1,6 +1,5 @@
-let a = "asdasd"
+let a = [1,2,3]
 
-
-
-
-console.log([...a])
+a.reduce((prev, cur, idx) => {
+    console.log(idx)
+})
