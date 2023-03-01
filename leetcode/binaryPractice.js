@@ -134,3 +134,26 @@ var inorderTraversal = function(root) {
 
     return arr
 };
+
+
+var postorderTraversal = function(root) {
+    // left, right, root
+    if (root === null) return [];
+
+    let stack = [root]
+    let arr = []
+
+    while(stack.length) {
+        let node = stack.pop()
+        arr.push(node.val)
+
+        if (node.left) {
+            stack.push(node.left)
+        }
+        if (node.right) {
+            stack.push(node.right)
+        }
+    }
+
+    return arr.reverse()
+};
