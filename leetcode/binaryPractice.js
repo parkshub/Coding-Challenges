@@ -113,3 +113,24 @@ function includesV2(root, target) {
     if (root.val === target) return true;
     return includes(root.left, target) || includes(root.right, target)
 }
+
+
+var inorderTraversal = function(root) {
+    // left root right
+    let stack = []
+    let arr = []
+
+    while(stack.length || root) {
+        if (root !== null) {
+            stack.push(root)
+            root = root.left
+        }
+        else {
+            node = stack.pop()
+            arr.push(node.val)
+            root = node.right
+        }
+    }
+
+    return arr
+};

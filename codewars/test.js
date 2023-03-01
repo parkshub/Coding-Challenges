@@ -1,4 +1,5 @@
-let a = 100
+let reg = /\w/
 
-console.log(a.length)
+let a = '1'
 
+console.log(reg.test(a))
