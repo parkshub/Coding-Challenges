@@ -45,3 +45,16 @@ function reduceByRules(numbers, rules) {
     return rules[(idx - 1) % rules.length](prev, cur)
   })
 }
+
+
+function narcissistic(value) {
+  
+  valueSplit = String(value).split('')
+  valueLen = valueSplit.length
+  
+  if (valueLen === 1) { return true }
+  
+  return value == valueSplit.reduce((prev, curr) => {
+    return prev + (curr ** valueLen)
+  }, 0)
+}

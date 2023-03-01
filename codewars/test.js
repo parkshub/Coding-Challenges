@@ -1,5 +1,4 @@
-let a = [1,2,3]
+let a = 100
 
-a.reduce((prev, cur, idx) => {
-    console.log(idx)
-})
+console.log(a.length)
+
