@@ -24,7 +24,6 @@ function spinWords(string){
   }).join(' ')
 }
 
-//here
 
 function smallEnough(a, limit){
   return a.filter(x => x > limit).length === 0
@@ -89,3 +88,22 @@ function decipherThis(str) {
   }
   return strSplit.join(' ')
 }; 
+
+
+function toCamelCase(str){
+  
+  if (str === '') { return str }
+  
+  let strSplit = str.split(/[_-]/)
+  
+  return strSplit.map((x, i) => {  
+      if (i === 0) { return x }
+    
+      let arr = x.split('')
+      
+      arr[0] = arr[0].toUpperCase()
+    
+      return arr.join('')
+  }).join('')
+  
+}
