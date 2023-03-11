@@ -107,3 +107,18 @@ function toCamelCase(str){
   }).join('')
   
 }
+
+function stockList(listOfArt, listOfCat){
+  
+  if (listOfArt.length === 0 || listOfCat.length === 0) { return '' }
+  
+  let cache = {}
+
+  listOfCat.forEach(x => cache[x] = 0)
+
+  listOfArt.forEach((x, i) => {
+      (Object.keys(cache).includes(x[0])) && (cache[x[0]] += Number(x.split(' ')[1]))
+  })
+
+  return Object.entries(cache).map(x => `(${x[0]} : ${x[1]})`).join(' - ')
+}
