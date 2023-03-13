@@ -122,3 +122,21 @@ function stockList(listOfArt, listOfCat){
 
   return Object.entries(cache).map(x => `(${x[0]} : ${x[1]})`).join(' - ')
 }
+
+
+function solve(s){
+  if (s === '') { return '' }
+  
+  let upperReg = /[A-Z]/g
+  let lowerReg = /[a-z]/g
+  
+  let upperArr = s.match(upperReg)
+  let lowerArr = s.match(lowerReg)
+  
+  
+  if (upperArr !== null && lowerArr !== null && upperArr.length > lowerArr.length) {
+    return s.toUpperCase()
+  }
+  
+  return s.toLowerCase()
+}
