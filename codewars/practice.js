@@ -157,3 +157,17 @@ function plus(x) { return function(y) { return y + x }}
 function minus(x) { return function(y) { return y - x }}
 function times(x) { return function(y) { return y * x }}
 function dividedBy(x) { return function(y) { return Math.floor(y / x) }}
+
+
+function twoSum(numbers, target) {
+  let hash = {}
+  
+  for (let i = 0; i < numbers.length; i++) {
+    let temp = numbers[i]
+    
+    if (hash[target - temp] !== undefined) {
+      return [hash[target - temp], i]
+    }
+    hash[temp] = i
+  }
+}
