@@ -171,3 +171,16 @@ function twoSum(numbers, target) {
     hash[temp] = i
   }
 }
+
+function findEvenIndex(arr) {
+  
+  if (arr.length === 0) { return 0 }
+  
+  for (let i = 0; i < arr.length; i++) {
+    let l = arr.slice(0,i).reduce((a,b) => { return a+b },0)
+    let r = arr.slice(i+1).reduce((a,b) => { return a+b },0)
+    if (l === r) { return i }
+  }
+  
+  return -1
+}
