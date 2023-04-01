@@ -184,3 +184,14 @@ function findEvenIndex(arr) {
   
   return -1
 }
+
+function createPhoneNumber(numbers){
+  
+  if (numbers.length < 10) { return ''}
+  
+  const beginning = `(${numbers.slice(0,3).join('')})`
+  const middle = numbers.slice(3,6).join('')
+  const end = numbers.slice(6).join('')
+
+  return beginning + ' ' + middle + '-' + end
+  }
