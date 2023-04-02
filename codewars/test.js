@@ -1,9 +1,20 @@
-let a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+let cache = {}
 
-let beginning = `(${a.slice(0,3).join('')})`
-let middle = a.slice(3,6).join('')
-let end = a.slice(6).join('')
+let A = [1,2,2,3,3,3,4,3,3,3,2,2,1]
 
-let res = beginning + ' ' + middle + '-' + end
+console.log(cache[1])
+
+
+A.forEach(x => {
+    if (!cache[x]) {
+        cache[x] = 1
+    } else {
+        cache[x] += 1
+    }
+})
+
+let idx = Object.values(cache).findIndex(x => x%2 != 0)
+
+let res = Object.keys(cache)[idx]
 
 console.log(res)

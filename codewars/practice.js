@@ -195,3 +195,21 @@ function createPhoneNumber(numbers){
 
   return beginning + ' ' + middle + '-' + end
   }
+
+function findOdd(A) {
+
+  if (A.length === 1) { return A[0] }
+  
+  let cache = {}
+  
+  A.forEach(x => {
+    if (!cache[x]) {
+        cache[x] = 1
+    } else {
+        cache[x] += 1
+    }
+  })
+
+  let idx = Object.values(cache).findIndex(x => x%2 != 0)
+  return Number(Object.keys(cache)[idx])
+}
