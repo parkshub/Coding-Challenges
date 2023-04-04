@@ -213,3 +213,20 @@ function findOdd(A) {
   let idx = Object.values(cache).findIndex(x => x%2 != 0)
   return Number(Object.keys(cache)[idx])
 }
+
+function deleteNth(arr,n){
+  let cache = {}
+  let res = []
+
+  arr.forEach((x) => {
+      if (!cache[x]) {
+          cache[x] = 1
+          res.push(x)
+      } else {
+          cache[x] += 1
+          if (cache[x] <= n) { res.push(x) }
+      }
+  })
+  
+  return res
+}
