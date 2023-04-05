@@ -1,16 +1,17 @@
-let n = 3
-let arr = [1,1,3,3,7,2,2,2,2]
-let cache = {}
-let res = []
+let array = ['a','b','c','d','f','g', 'i']
 
-arr.forEach((x) => {
-    if (!cache[x]) {
-        cache[x] = 1
-        res.push(x)
-    } else {
-        cache[x] += 1
-        if (cache[x] <= 3) { res.push(x) }
-    }
+let position = array[0].charCodeAt()
+
+// console.log(array[0].charCodeAt())
+
+// console.log(array.slice(1))
+let res;
+
+array.to
+
+array.slice(1).forEach(x => {
+    if (position + 1 != x.charCodeAt()) { return res = String.fromCharCode(position + 1) }
+    else { position += 1 }
 })
 
-console.log(res, cache)
+console.log(res)

@@ -230,3 +230,18 @@ function deleteNth(arr,n){
   
   return res
 }
+
+
+function findMissingLetter(array) {
+  
+  let position = array[0].charCodeAt()
+
+  let res;
+  
+  array.slice(1).forEach(x => {
+      if (position + 1 != x.charCodeAt()) { return res = String.fromCharCode(position + 1) }
+      else { position += 1 }
+  })
+  
+  return res
+}
