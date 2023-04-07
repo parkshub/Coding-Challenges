@@ -245,3 +245,10 @@ function findMissingLetter(array) {
   
   return res
 }
+
+
+function high(x){
+  let xSplit = x.split(' ')
+  let values = xSplit.map(x => x.split('').reduce((prev, cur) => { return prev + cur.charCodeAt() - 96 },0))
+  return xSplit[values.indexOf(Math.max(...values))]
+}
