@@ -252,3 +252,12 @@ function high(x){
   let values = xSplit.map(x => x.split('').reduce((prev, cur) => { return prev + cur.charCodeAt() - 96 },0))
   return xSplit[values.indexOf(Math.max(...values))]
 }
+
+
+function likes(names) {
+  if (!names.length) { return 'no one likes this'}
+  if (names.length === 1) { return `${names[0]} likes this`}
+  if (names.length === 2) { return names.join(' and ') + ' like this'}
+  if (names.length === 3) { return names.slice(0,2).join(', ') + ' and ' + names.slice(2) + ' like this'}
+  return names.slice(0,2).join(', ') + ' and ' + `${names.length - 2} others like this`
+}
