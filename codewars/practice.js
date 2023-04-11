@@ -261,3 +261,19 @@ function likes(names) {
   if (names.length === 3) { return names.slice(0,2).join(', ') + ' and ' + names.slice(2) + ' like this'}
   return names.slice(0,2).join(', ') + ' and ' + `${names.length - 2} others like this`
 }
+
+function diamond(n){
+  if (n <= 0 || n%2 === 0) { return null }
+  if (n === 1) { return '*\n'}
+
+  let arr = []
+  const constant = n - Math.floor(n/2)
+  
+  for (let i = 0; i < n; i++) {
+    let space = Math.abs(n - constant - i)
+    let x = n - space * 2
+    arr.push(' '.repeat(space) + '*'.repeat(x))
+  }
+  
+  return arr.join('\n') + '\n'
+}
