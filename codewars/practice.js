@@ -277,3 +277,7 @@ function diamond(n){
   
   return arr.join('\n') + '\n'
 }
+
+function arrayDiff(a, b) {
+  return a.filter(x => !b.includes(x))
+}
