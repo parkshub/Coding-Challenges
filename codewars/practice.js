@@ -281,3 +281,34 @@ function diamond(n){
 function arrayDiff(a, b) {
   return a.filter(x => !b.includes(x))
 }
+
+function solve(input){
+  let inputSplit = input.split('\n')
+
+  let arr = []
+
+  for (i of inputSplit) {
+
+    let res = 0
+    let newInput = i.split(' ')
+
+    let input1 = newInput[0].split('').reverse()
+    let input2 = newInput[1].split('').reverse()
+
+    input1.reduce((prev,curr,i) => {
+
+      let test = String(Number(curr) + Number(input2[i]) + Number(prev))
+      test = test.length > 1 ? test[0] : 0
+
+      if (test > 0) { 
+        res+= 1 
+      }
+      return test
+    }, 0)
+
+    if (res === 0) { res = 'No'}
+    arr.push(`${res} carry operation${res > 0 ? 's' : ''}`)
+  }
+  
+  return arr.join('\n')
+}
