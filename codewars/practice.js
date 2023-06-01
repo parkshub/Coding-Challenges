@@ -312,3 +312,23 @@ function solve(input){
   
   return arr.join('\n')
 }
+
+// Review after long break
+
+function solution(number){
+  if (number <= 3) { return 0 }
+  
+  const arr = []
+  
+  for (let i = number-1; i >= 3; i--) {
+    if (i%3 === 0 && i%5 === 0) {
+      arr.push(i)
+    } else if (i%3 === 0) {
+      arr.push(i)
+    } else if (i%5 === 0){
+      arr.push(i)
+    }
+  }
+
+  return arr.reduce((prev, cur) => prev + cur)
+}

@@ -1,42 +1,31 @@
-let a = "582862 485371\n737478 183553\n279982 480476\n560827 319003\n829175 852665"
+let a = 'bbdd kk eee ooo ppp qqttzz' // false
 
-// let input = '123 456'
-// let input = '555 555'
-let input = "582862 485371\n737478 183553\n279982 480476\n560827 319003\n829175 852665"
-let inputSplit = input.split('\n')
+// 
 
-// let arr = []
+// let a = 'cc dd hh kk rr uuuuu vv zz' // true
 
+// console.log(a.split('').sort().join(''))
 
 
-// for (i of inputSplit) {
+function permuteAPalindrome (input) {
+    const even = input.length % 2 === 0 ? true : false
+    let counter = 0
 
-  let i = '582862 485371'
+    for (i of input.split('')) {
+        
+        const reg = new RegExp(i, 'gi')
+        input.match(reg).length % 2 !== 0 && (counter += 1)
+        // console.log(input.match(reg))
+        // console.log(counter)
 
-  let res = 0
-  let newInput = i.split(' ')
-
-  let input1 = newInput[0].split('').reverse()
-  let input2 = newInput[1].split('').reverse()
-
-  input1.reduce((prev,curr,i) => {
-
-    console.log(prev, curr, input2[i], i)
-
-    let test = String(Number(curr) + Number(input2[i]) + Number(prev))
-    test = test.length > 1 ? test[0] : 0
-
-    if (test > 0) { 
-      res+= 1 
+        // if (counter > 1) { return false }
     }
-    return test
-  }, 0)
 
-  console.log(res)
+    console.log('this is counter', counter)
+    console.log('this is even', even)
 
-  // if (res === 0) { res = 'No'}
-  // arr.push(`${res} carry operation${res > 0 ? 's' : ''}`)
-// }
+    return even && counter === 0 || even && counter % 2 === 0 || !even && counter % 2 !== 0 || !even && counter === 1
 
-// console.log(arr.join('\n'))
+}
 
+console.log(permuteAPalindrome(a))
