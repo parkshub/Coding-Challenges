@@ -332,3 +332,19 @@ function solution(number){
 
   return arr.reduce((prev, cur) => prev + cur)
 }
+
+function permuteAPalindrome (input) {
+  const cache = {}
+  let counter = 0
+  
+  for (let letter of input) {
+      cache[letter] = cache[letter] || 0
+      cache[letter] += 1
+  }
+
+  for (let count of Object.values(cache)) {
+      counter += count % 2
+  }
+
+  return counter < 2
+}
