@@ -1,31 +1,25 @@
-let a = 'bbdd kk eee ooo ppp qqttzz' // false
+// only one odd allowed
 
-// 
-
-// let a = 'cc dd hh kk rr uuuuu vv zz' // true
-
-// console.log(a.split('').sort().join(''))
-
+let a = 'asd'
 
 function permuteAPalindrome (input) {
-    const even = input.length % 2 === 0 ? true : false
+    const cache = {}
     let counter = 0
-
-    for (i of input.split('')) {
-        
-        const reg = new RegExp(i, 'gi')
-        input.match(reg).length % 2 !== 0 && (counter += 1)
-        // console.log(input.match(reg))
-        // console.log(counter)
-
-        // if (counter > 1) { return false }
+    
+    for (let letter of input) {
+        cache[letter] = cache[letter] || 0
+        cache[letter] += 1
     }
 
-    console.log('this is counter', counter)
-    console.log('this is even', even)
+    for (let count of Object.values(cache)) {
+        counter += count % 2
+    }
 
-    return even && counter === 0 || even && counter % 2 === 0 || !even && counter % 2 !== 0 || !even && counter === 1
-
+    return counter < 2
 }
 
-console.log(permuteAPalindrome(a))
+// for (let i of a) {
+//     console.log(i)
+// }
+
+console.log(permuteAPalindrome('madam'))
