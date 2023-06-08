@@ -348,3 +348,7 @@ function permuteAPalindrome (input) {
 
   return counter < 2
 }
+
+function digitize(n) {
+  return String(n).split('').reverse().map(x => Number(x))
+}
