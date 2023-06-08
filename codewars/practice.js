@@ -413,3 +413,67 @@ const depthFirstRec = (source, graph) => {
     depthFirstRec(neighbor, graph)
   }
 }
+
+
+// acyclic = no cycles, meaning you can't get to the node you started from
+// we also need a source node and a destination node
+
+// f -- g -- h
+// |  /
+// i -- j
+// |
+// k
+
+
+const graph2 = {
+  f: ['g','i'],
+  g: ['h'],
+  h: [],
+  i: ['g','k'],
+  j: ['i'],
+  k: []
+}
+
+
+const hasPathDepthRec = (graph, src, dst) => {
+  if (src === dst) { return true }
+
+  for (let neighbor of graph[src]) {
+    if (hasPathDepth(graph, neighbor, dst) === true) { return true }
+  }
+
+  return false
+}
+
+
+const hasPathDepth = (graph, src, dst) => {
+  const stack = [ src ]
+
+  while (stack.length) {
+    const current = stack.pop()
+    
+    if (current === dst) { return true }
+
+    for (let neighbor of graph[current]) {
+      stack.push(neighbor)
+    }
+  }
+
+  return false
+}
+
+const hasPathBreadth = (graph, src, dst) => {
+  // can't do recursive
+  const queue = [ src ]
+
+  while(queue.length) {
+    const current = queue.shift()
+    if (current === dst) { return true }
+
+    for (let neighbor of graph[current]) {
+      queue.push(neighbor)
+    }
+  }
+
+  return false
+}
