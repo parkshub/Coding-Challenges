@@ -1,3 +1,5 @@
-let a = 35231
+let a = []
 
-console.log(String(a).split('').reverse().map(x => Number(x)))
+while (a.length) {
+    console.log('first')
+}
