@@ -36,7 +36,6 @@ const graph = {
     }
   }
   
-  
   const depthFirst = (source, graph) => {
     const stack = [ source ]
   
@@ -49,8 +48,7 @@ const graph = {
       }
     }
   }
-  
-  
+   
   const depthFirstRec = (source, graph) => {
     console.log(source)
   
@@ -58,8 +56,7 @@ const graph = {
       depthFirstRec(neighbor, graph)
     }
   }
-  
-  
+
 // acyclic = no cycles, meaning you can't get to the node you started from
 // we also need a source node and a destination node
 
@@ -127,7 +124,9 @@ const graph = {
 // undirected graph
 // if given just edges, convert into adjacency list
 
-// try with edge below, for this problem, you only need to visit a node once to and record that it's been visited with a set
+// try with edge below to determine if there is a path form a to b, for this problem, you only need to visit a node once to and record that it's been visited with a set
+// need two helper functions 1) convert into adjacency list 2) check if a path exists
+// use recursion
 
 const edges = [
     ['i', 'j'],
@@ -137,6 +136,115 @@ const edges = [
     ['o', 'n']
 ]
 
+const buildGraph = (edges) => {
+  const graph = {}
+
+  for (let edge of edges) {
+    const [a, b] = edge
+    !graph[a] ? graph[a] = [b] : graph[a].push(b)
+    !graph[b] ? graph[b] = [a] : graph[b].push(a)
+  }
+
+  return graph
+}
+
+console.log(buildGraph(edges))
+
+const hasPath = (graph, src, dst, visited) => {
+  if (src === dst) { return true }
+  if (visited.has(src)) { return false }
+
+  visited.add(src)
+
+  for (let neighbor of graph[src]) {
+    if (hasPath(graph, neighbor, dst, visited) === true) {
+      return true
+    }
+  }
+
+  return false;
+}
+
+const undirectedPath = (edges, nodeA, nodeB) => {
+  const graph = buildGraph(edges)
+  return hasPath(graph, nodeA, nodeB, new Set())
+}
+
+
+// Iterative solution if all nodes where numericals
+// probably works even if lettered nodes
+
+// var validPath = function(n, edges, start, end) {
+//   const graph = new Map()
+//   // create our adjacency list
+//   edges.forEach(([a,b]) => {
+//       if (!graph.has(a)) {
+//           graph.set(a, [])
+//       }
+//       if (!graph.has(b)) {
+//           graph.set(b, [])
+//       }
+//       graph.get(a).push(b)
+//       graph.get(b).push(a)
+//   })
+//   // prevent revisiting nodes
+//   const visited = new Array(n)
+//   const queue = [start]
+//   while (queue.length > 0) {
+//       const node = queue.shift() // this is an O(n) operation here. if we used a real queue the dequeue method would be O(1)
+//       if (node === end) {
+//           return true
+//       }
+//       visited[node] = true
+//       graph.get(node).forEach((neighbor) => {
+//           if (!visited[neighbor]) {
+//               queue.push(neighbor)
+//           }
+//       })
+//   }
+//   return false
+// };
+
+
 // try with edges below to solve connected components count
 
-const edges2 = []
+
+const graph3 = {
+  0: [8, 1, 5],
+  1: [0],
+  5: [0, 8],
+  8: [0, 5],
+  2: [3, 4],
+  3: [2, 4],
+  4: [3, 2]
+}
+
+// How many connections?
+
+const connectedComponentsCount = (graph) => {
+  const visited = new Set()
+  let count = 0
+
+  for (let node in graph) {
+    console.log(visited)
+    if (explore(graph, node, visited) === true) {
+      count +=1
+    }
+  }
+
+  return count
+}
+
+const explore = (graph, current, visited) => {
+  if (visited.has(String(current))) return false;
+
+  visited.add(String(current))
+
+  for (let neighbor of graph[current]) {
+    explore(graph, neighbor, visited) // this function returning false does not output a false for explore
+  }
+
+  return true
+}
+
+console.log(connectedComponentsCount(graph3))
