@@ -60,6 +60,9 @@ const graph = {
 // acyclic = no cycles, meaning you can't get to the node you started from
 // we also need a source node and a destination node
 
+
+// directed has path problem
+
 // f -- g -- h
 // |  /
 // i -- j

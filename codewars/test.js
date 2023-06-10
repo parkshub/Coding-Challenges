@@ -192,5 +192,3 @@ const explore = (node, graph, visited) => {
 
     return true
 }
-
-console.log(connectedComponentsCount(graph3))
