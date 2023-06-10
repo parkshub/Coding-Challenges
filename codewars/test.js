@@ -192,3 +192,8 @@ const explore = (node, graph, visited) => {
 
     return true
 }
+
+
+let a = new Map([['c', 123],['b', 456]])
+
+console.log(a['c'])

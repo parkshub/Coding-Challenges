@@ -94,3 +94,46 @@ const dirHasPathBreadth = (src, dst, graph) => {
 
 
 // now do undirected graph hasPath and connectedComponents
+
+const edges = [
+    ['i', 'j'],
+    ['k', 'i'],
+    ['m', 'k'],
+    ['k', 'l'],
+    ['o', 'n']
+]
+
+const undirHasPath = (edges, nodeA, nodeB) => {
+    const graph = makeGraph(edges)
+    return undirPathHelper(graph, nodeA, nodeB, new Set())
+}
+
+const makeGraph = (edges) => {
+    const graph = {}
+
+    for (let edge of edges) {
+        const [a, b] = edge
+
+        graph[a] ? graph[a].push(b) : graph[a] = [b]
+        graph[b] ? graph[b].push(a) : graph[b] = [a]
+    }
+
+    return graph
+}
+
+const undirPathHelper = (graph, src, dst, visited) => {
+    if (src === dst) { return true }
+    if (visited.has(src)) { return false }
+
+    visited.add(src)
+
+    for (let neighbor of graph[src]) {
+        if (undirPathHelper(graph, neighbor, dst, visited) === true) {
+            return true
+        }
+    }
+
+    return false
+}
+
+console.log(undirHasPath(edges, 'i', 'o'))
