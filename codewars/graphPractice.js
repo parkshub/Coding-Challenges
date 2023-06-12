@@ -1,3 +1,5 @@
+// https://www.youtube.com/watch?v=tWVWeAqZ0WU&list=PLYXTMeEw1oo90WpyT0bdT9y867mQvePBd&ab_channel=freeCodeCamp.org
+
 const graph = {
     a: ['b', 'c'],
     b: ['d'],
@@ -222,6 +224,16 @@ const graph3 = {
   4: [3, 2]
 }
 
+// const graph3 = {
+//   0: ['8', '1', '5'],
+//   1: ['0'],
+//   5: ['0', '8'],
+//   8: ['0', '5'],
+//   2: ['3', '4'],
+//   3: ['2', '4'],
+//   4: ['3', '2']
+// }
+
 // How many connections?
 
 const connectedComponentsCount = (graph) => {
@@ -250,4 +262,120 @@ const explore = (graph, current, visited) => {
   return true
 }
 
-console.log(connectedComponentsCount(graph3))
+// largest component
+// NOT SURE WHY BUT IM GETTING 5, THE ANSWER SHOULD BE 4
+
+const largestComponent = (graph) => {
+  const visited = new Set()
+  let longest = 0
+  for (let node in graph) {
+    const size = exploreSize(node, graph, visited)
+    if (size > longest) { longest = size }
+  }
+
+  return longest
+}
+
+const exploreSize = (node, graph, visited) => {
+  if (visited.has(String(node))) { return 0 }
+  let size = 1
+  visited.add(String(node))
+
+  for (let neighbor of graph[node]) {
+    size += exploreSize(neighbor, graph, visited)
+  }
+
+  return size
+}
+
+// shortest path algorithm
+// breadth first is ideal, think about why that is
+// since we're doing breadth first, we do queue
+
+const edges2 = [
+  ['w', 'x'],
+  ['x', 'y'],
+  ['z', 'y'],
+  ['z', 'v'],
+  ['w', 'v']
+]
+
+const shortest = (edges, nodeA, nodeB) => {
+  const graph = buildGraph(edges)
+  const visited = new Set([ nodeA ])
+
+  const queue = [ [ nodeA, 0] ]
+
+  while(queue.length) {
+    const [ node, dist ] = queue.pop()
+    if (node === nodeB) { return dist }
+
+    for (let neighbor of graph[node]) {
+      if (!visited.has(neighbor)) {
+        visited.add(neighbor)
+        queue.push([ neighbor, dist + 1 ])
+      }
+    }
+  }
+
+  return -1
+}
+
+// console.log(shortest(edges2, 'w', 'z'))
+
+
+// number of islands
+// for these problems the time and space complexity is
+// O(r * c) where is row and c is column
+
+const grid = [
+  ['W', 'L', 'W', 'W', 'W'],
+  ['W', 'L', 'W', 'W', 'W'],
+  ['W', 'W', 'W', 'L', 'W'],
+  ['W', 'W', 'L', 'L', 'W'],
+  ['L', 'W', 'W', 'L', 'L'],
+  ['L', 'L', 'W', 'W', 'W'],
+]
+
+// if you put in any refence type objects into a set
+// you won't be able to do set.has([a,b]) since it's going to check for reference equality
+
+const islandCount = (grid) => {
+  const visited = new Set()
+  let count = 0
+
+  for (let r = 0; r < grid.length; r++) {
+    for (let c = 0; c < grid[0].length; c++) {
+      if (exploreIsland(grid, r, c, visited) === true) {
+        count += 1
+      }
+    }
+  }
+
+  return count
+}
+
+const exploreIsland = (grid, r, c, visited) => {
+  const rowInbounds = 0 <= r && r < grid.length
+  const colInbounds = 0 <= c && c < grid[0].length
+  if (!rowInbounds || !colInbounds) { return false }
+
+  if (grid[r][c] === 'W') { return false }
+  // last time i forgot to include this. think about why this would affect your code
+
+  const pos = r + ',' + c
+
+  if (visited.has(pos)) { return false }
+
+  visited.add(pos)
+
+  exploreIsland(grid, r + 1, c, visited)
+  exploreIsland(grid, r - 1, c, visited)
+  exploreIsland(grid, r, c + 1, visited)
+  exploreIsland(grid, r, c - 1, visited)
+
+  return true
+}
+
+
+// minimum island problem
