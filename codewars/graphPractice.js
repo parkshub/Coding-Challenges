@@ -153,7 +153,7 @@ const buildGraph = (edges) => {
   return graph
 }
 
-console.log(buildGraph(edges))
+// console.log(buildGraph(edges))
 
 const hasPath = (graph, src, dst, visited) => {
   if (src === dst) { return true }
@@ -379,3 +379,42 @@ const exploreIsland = (grid, r, c, visited) => {
 
 
 // minimum island problem
+
+const minimumIsland = (grid) => {
+  let minimum = Infinity
+  const visited = new Set()
+
+  for (let r = 0; r < grid.length; r++) {
+    for (let c = 0; c < grid[0].length; c++) {
+      let size = exploreIslandSize(graph, r, c, visited)
+      if (size !== 0 && size < minimum) {
+        minimum = size
+      }
+    }
+  }
+
+  return minimum
+}
+
+const exploreIslandSize = (graph, r, c, visited) => {
+  
+
+  if (r < 0 || r >= grid.length) { return 0 }
+  if (c < 0 || c >= grid[0].length) { return 0 }
+  if (grid[r][c] === 'W') { return 0 }
+
+  const pos = r + ',' + c
+
+  if (visited.has(pos)) { return 0 }
+
+  visited.add(pos)
+
+  let size = 1
+
+  size += exploreIslandSize(graph, r - 1, c, visited)
+  size += exploreIslandSize(graph, r + 1, c, visited)
+  size += exploreIslandSize(graph, r, c - 1, visited)
+  size += exploreIslandSize(graph, r, c + 1, visited)
+
+  return size
+}
