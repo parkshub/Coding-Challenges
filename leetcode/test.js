@@ -329,8 +329,6 @@ const exploreMinIsland = (grid, r, c, visited) => {
     return size
 }
 
-console.log(minIsland(grid))
-
 class Node {
     constructor(val) {
         this.val = val
@@ -338,13 +336,77 @@ class Node {
     }
 }
 
-const a = new Node('a')
-const b = new Node('b')
-const c = new Node('c') 
-const d = new Node('d')
+const a = new Node(2)
+const b = new Node(8)
+const c = new Node(3) 
+const d = new Node(7)
 
 a.next = b
 b.next = c
 c.next = d
 
-console.log(JSON.stringify(a))
+const traverse = (head) => {
+    let current = head
+    const res = []
+
+    while(current !== null) {
+        res.push(current.val)
+        current = current.next
+    }
+
+    return res
+}
+
+const traverseRec1 = (head, arr) => {
+    if (head === null) { return }
+    arr.push(head.val)
+    traverseRec(head.next, arr)
+
+    return arr
+}
+
+const traverseRec2 = (head) => {
+    const values = []
+    
+    helper(head, values)
+
+    return values
+}
+
+const helper = (head, values) => {
+    if (head === null) { return }
+    values.push(head.val)
+    helper(head.next, values)
+}
+
+const sumList = (head) => {
+    let sum = 0
+
+    let current = head
+
+    while(current !== null) {
+        sum += current.val
+        current = current.next
+    }
+
+    return sum
+}
+
+// 2, 8, 3, 7
+const sumListRec = (head) => {
+    if (head === null) { return 0 }
+    return head.val + sumListRec(head.next)
+// do this
+}
+
+
+const AA = class {
+    constructor(val) {
+        this.val = val
+        this.next = null
+    }
+}
+
+const gg = new AA('a')
+
+console.log(gg)

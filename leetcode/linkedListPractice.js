@@ -25,16 +25,51 @@ a.next = b
 b.next = c
 c.next = d
 
+// both iterative and recursive time space complexity is O(n)
+
 const traverse = (head) => {
     let current = head
-    while(current !== null) {
+    while(current !== null) { // the reason we don't do current.next !== null is because it'll skip the last element. Think about it
         console.log(current.val)
         current = current.next
     }
 }
 
-const traverseRec = (head) => {
+const traverseRec1 = (head) => {
     if (head === null) { return }
     console.log(head.val)
     traverseRec(head.next)
+}
+
+const traverseRec2 = (head) => {
+    const values = []
+    
+    helper(head, values)
+
+    return values
+}
+
+const helper = (head, values) => {
+    if (head === null) { return }
+    values.push(head.val)
+    helper(head.next, values)
+}
+
+const sumList = (head) => {
+    let sum = 0
+
+    let current = head
+
+    while(current !== null) {
+        sum += current.val
+        current = current.next
+    }
+
+    return sum
+}
+
+// 2, 8, 3, 7
+const sumListRec = (head) => {
+    if (head === null) { return 0 }
+    return head.val + sumListRec(head.next)
 }
