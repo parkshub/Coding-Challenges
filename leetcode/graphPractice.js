@@ -175,40 +175,26 @@ const undirectedPath = (edges, nodeA, nodeB) => {
   return hasPath(graph, nodeA, nodeB, new Set())
 }
 
+// hasPath iterative solution
+const hasPathIterative = (edges, src, dst, visited) => {
+  // breadth traversal
+  const graph = buildGraph(edges)
+  const queue = [ src ]
 
-// Iterative solution if all nodes where numericals
-// probably works even if lettered nodes
+  while (queue.length) {
+      const current = queue.shift()
+      
+      if (current === dst) { return true }
+      
+      for (let neighbor of graph[current]) {
+          if (visited.has(neighbor)) { continue }
+          visited.add(neighbor)
+          queue.push(neighbor)
+      }
+  }
 
-// var validPath = function(n, edges, start, end) {
-//   const graph = new Map()
-//   // create our adjacency list
-//   edges.forEach(([a,b]) => {
-//       if (!graph.has(a)) {
-//           graph.set(a, [])
-//       }
-//       if (!graph.has(b)) {
-//           graph.set(b, [])
-//       }
-//       graph.get(a).push(b)
-//       graph.get(b).push(a)
-//   })
-//   // prevent revisiting nodes
-//   const visited = new Array(n)
-//   const queue = [start]
-//   while (queue.length > 0) {
-//       const node = queue.shift() // this is an O(n) operation here. if we used a real queue the dequeue method would be O(1)
-//       if (node === end) {
-//           return true
-//       }
-//       visited[node] = true
-//       graph.get(node).forEach((neighbor) => {
-//           if (!visited[neighbor]) {
-//               queue.push(neighbor)
-//           }
-//       })
-//   }
-//   return false
-// };
+  return false
+}
 
 
 // try with edges below to solve connected components count
@@ -260,6 +246,33 @@ const explore = (graph, current, visited) => {
   }
 
   return true
+}
+
+const connectedComponentsCountIterative= (graph) => {
+  const visited = new Set()
+  let count = 0
+
+  for (let node in graph) {
+
+      if (visited.has(String(node))) { continue }
+
+      const stack = [ node ]
+
+      while (stack.length) {
+          const current = stack.pop()
+
+          for (let neighbor of graph[current]) {
+              if (!visited.has(String(neighbor))) { 
+                  visited.add(String(neighbor))
+                  stack.push(neighbor)
+              }
+          }
+      }
+
+      count += 1
+  }
+
+  return count
 }
 
 // largest component
