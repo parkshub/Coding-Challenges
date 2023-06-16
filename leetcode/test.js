@@ -396,17 +396,4 @@ const sumList = (head) => {
 const sumListRec = (head) => {
     if (head === null) { return 0 }
     return head.val + sumListRec(head.next)
-// do this
 }
-
-
-const AA = class {
-    constructor(val) {
-        this.val = val
-        this.next = null
-    }
-}
-
-const gg = new AA('a')
-
-console.log(gg)

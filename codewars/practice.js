@@ -353,5 +353,16 @@ function digitize(n) {
   return String(n).split('').reverse().map(x => Number(x))
 }
 
+// 'abc', 'bc'
 
+function solution(str, ending){
+  
+}
 
+let a = 'asd'
+
+let ending = 'sd'
+
+ending.length
+
+console.log(a.slice(-ending.length) == 'sd')
