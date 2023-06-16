@@ -356,13 +356,5 @@ function digitize(n) {
 // 'abc', 'bc'
 
 function solution(str, ending){
-  
+  return ending === '' || str.slice(-ending.length) === ending
 }
-
-let a = 'asd'
-
-let ending = 'sd'
-
-ending.length
-
-console.log(a.slice(-ending.length) == 'sd')
