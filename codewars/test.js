@@ -1,38 +1,23 @@
-const graph = {
-  0: ['8', '1', '5'],
-  1: ['0'],
-  5: ['0', '8'],
-  8: ['0', '5'],
-  2: ['3', '4'],
-  3: ['2', '4'],
-  4: ['3', '2']
-}
+// let a = 89
+// let b = 135
 
-const largest = (graph) => {
-    const visited = new Set()
 
-    let largest = 0
+let count = 0
 
-    for (let node in graph) {
-        let size = explore(node, graph, visited)
-        if (size > largest) { largest = size }
+let a = 50
+let b = 150
+let arr = []
+for (let pos = a; pos <= b; pos++) {
+    let count = 0
+    let stringed = String(pos)
+    for (let i = 0; i < stringed.length; i++) {
+        count += Math.pow(stringed[i], i + 1)
     }
-
-    return largest
+    if (count === pos) { arr.push(pos) }
 }
 
-const explore = (src, graph, visited) => {
-    if (visited.has(src)) { return 0 }
 
-    visited.add(src)
+console.log(arr)
 
-    let size = 1
 
-    for (let neighbor of graph[src]) {
-        size += explore(neighbor, graph, visited)
-    }
 
-    return size
-}
-
-console.log(largest(graph))
