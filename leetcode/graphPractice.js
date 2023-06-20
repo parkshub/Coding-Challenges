@@ -63,7 +63,7 @@ const graph = {
 // we also need a source node and a destination node
 
 
-// directed has path problem
+// acyclic directed has path problem
 
 // f -- g -- h
 // |  /
