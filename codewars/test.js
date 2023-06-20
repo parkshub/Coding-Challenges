@@ -1,23 +1,19 @@
-// let a = 89
-// let b = 135
+function zero(a) {
+    if (a) { return a(0) }
+    return 0
+}
 
-
-let count = 0
-
-let a = 50
-let b = 150
-let arr = []
-for (let pos = a; pos <= b; pos++) {
-    let count = 0
-    let stringed = String(pos)
-    for (let i = 0; i < stringed.length; i++) {
-        count += Math.pow(stringed[i], i + 1)
-    }
-    if (count === pos) { arr.push(pos) }
+function one(a) {
+    if (a) { return a(1)}
+    return 1
 }
 
 
-console.log(arr)
+function minus(a) {
+    return function(b) {
+        return b - a
+    }
+}
 
 
-
+console.log(zero(minus(one())))
