@@ -220,6 +220,8 @@ const graph3 = {
 //   4: ['3', '2']
 // }
 
+
+
 // How many connections?
 
 const connectedComponentsCount = (graph) => {
@@ -243,6 +245,8 @@ const explore = (graph, current, visited) => {
 
   for (let neighbor of graph[current]) {
     explore(graph, neighbor, visited) // this function returning false does not output a false for explore
+    // during practice i got this part of the function wrong...
+    // i put if explore === true return true which is wrong because the end of node will return true when we only want true when the function has traversed through the whole component
   }
 
   return true

@@ -1,0 +1,1 @@
+select first_name, last_name, dob, EXTRACT(year from AGE(now(), dob)) as age from person order by age;

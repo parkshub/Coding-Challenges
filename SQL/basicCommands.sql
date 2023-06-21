@@ -15,3 +15,5 @@
 -- DROP TABLE <table>
 
 -- person q when there are more options makes you exit
+
+-- ALTER TABLE <table> RENAME TO <new table>
