@@ -4,7 +4,7 @@
 
 select now()::time with time zone
 
-select now()::date without time zone
+select now()::time without time zone
 
 
 -- how to subtract one year from now

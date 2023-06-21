@@ -307,7 +307,7 @@ const exploreSize = (node, graph, visited) => {
 
 // shortest path algorithm
 // breadth first is ideal, think about why that is
-// since we're doing breadth first, we do queue
+// since we're doing breadth first, we do queue and cant do recursive
 
 const edges2 = [
   ['w', 'x'],
