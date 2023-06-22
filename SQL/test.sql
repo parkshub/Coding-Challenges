@@ -77,5 +77,14 @@ alter table person add constraint unique_email_address unique(email)
 -- or
 alter table person add constraint unique(email)
 
--- what does nullif do?
--- nullif(x, y) means isx matches the second value return null, if not return x
+-- how would you handle dividing by zero?
+
+-- add a constraint that says gender cannot equal hello. and what is this type of constraint called?
+
+-- add a constraints that states emails can be whatever meaning '%'
+
+-- update any record to something else
+
+-- try inserting an entry that already exists but with the error removed
+
+-- try inserting something with the same id, but override the error and update only the email, first name and last name
