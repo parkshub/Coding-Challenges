@@ -60,37 +60,35 @@ const edges2 = [
     ['w', 'x'],
     ['x', 'y'],
     ['z', 'y'],
-    ['v', 'j'],
-    ['j', 'k'],
-    ['k', 'z'],
-    ['w', 'v'],
     ['z', 'v'],
+    ['w', 'v']
   ]
 
 // shortest path
 
-const shortest = (edges, src, dst) => {
-    function buildGraph(edges) {
-        const graph = {}
+function buildGraph(edges) {
+    const graph = {}
 
-        for (let edge of edges) {
-            const [ a, b ] = edge
-            graph[a] ? graph[a].push(b) : graph[a] = [b]
-            graph[b] ? graph[b].push(a) : graph[b] = [a]
-        }
-
-        return graph
+    for (let edge of edges) {
+        const [ a, b ] = edge
+        graph[a] ? graph[a].push(b) : graph[a] = [b]
+        graph[b] ? graph[b].push(a) : graph[b] = [a]
     }
 
-    const graph = buildGraph(edges)
-    const visited = new Set([ src ])
-    const queue = [ [ src, 0 ] ]
-    
-    while(queue.length) {
-        const [ current, distance ] = queue.shift()
-        if (current === dst) { return distance }
+    return graph
+}
 
-        for (let neighbor of graph[current]) {
+const shortest = (edges, src, dst) => {
+    const graph = buildGraph(edges)
+    
+    const visited = new Set([ src ])
+    const queue = [ [src, 0] ]
+
+    while(queue.length) {
+        const [ node, distance ] = queue.pop()
+        if (node === dst) { return distance }
+
+        for (let neighbor of graph[node]) {
             if (!visited.has(neighbor)) {
                 visited.add(neighbor)
                 queue.push([ neighbor, distance + 1 ])
@@ -102,8 +100,52 @@ const shortest = (edges, src, dst) => {
 }
 
 
-console.log(shortest(edges2, 'w', 'z'))
+// console.log(shortest(edges2, 'w', 'z'))
 
 // number of islands
+const grid = [
+    ['W', 'L', 'W', 'W', 'W'],
+    ['W', 'L', 'W', 'W', 'W'],
+    ['W', 'W', 'W', 'L', 'W'],
+    ['W', 'W', 'L', 'L', 'W'],
+    ['L', 'W', 'W', 'L', 'L'],
+    ['L', 'L', 'W', 'W', 'W'],
+  ]
+
+const numIsland = (grid) => {
+    let res = 0
+    const visited = new Set()
+
+    for (let r = 0; r < grid.length; r++) {
+        for (let c = 0; c < grid[0].length; c++) {
+            if (helper(grid, r, c, visited) === true) {
+                res += 1
+            }
+        }
+    }
+
+    return res
+}
+
+const helper = (grid, r, c, visited) => {
+    if (r < 0 || r >= grid.length) { return false }
+    if (c < 0 || c >= grid[0].length) { return false }
+    if (grid[r][c] === 'W') { return false }
+
+    const pos = r + ',' + c
+
+    if (visited.has(pos)) { return false }
+
+    visited.add(pos)
+
+    helper(grid, r - 1, c, visited)
+    helper(grid, r + 1, c, visited)
+    helper(grid, r, c - 1, visited)
+    helper(grid, r, c + 1, visited)
+
+    return true
+}
+
+console.log(numIsland(grid))
 
 // smallest island

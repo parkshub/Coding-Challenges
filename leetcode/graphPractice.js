@@ -338,7 +338,7 @@ const shortest = (edges, nodeA, nodeB) => {
   return -1
 }
 
-// console.log(shortest(edges2, 'w', 'z'))
+console.log(shortest(edges2, 'w', 'z'))
 
 
 // number of islands
