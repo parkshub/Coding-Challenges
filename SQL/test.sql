@@ -77,14 +77,24 @@ alter table person add constraint unique_email_address unique(email)
 -- or
 alter table person add constraint unique(email)
 
+-----------------------------------------
 -- how would you handle dividing by zero?
 
+select coalesce(10/nullif(0/0))
+
 -- add a constraint that says gender cannot equal hello. and what is this type of constraint called?
+alter table person add constraint gender_constraint check (gender <> 'hello') -- check constraint
 
 -- add a constraints that states emails can be whatever meaning '%'
+alter table person add constraint email_constraint check (email ilike('%p'))
 
 -- update any record to something else
+update person set email = 'something else' where id = 1
 
 -- try inserting an entry that already exists but with the error removed
 
+insert into person (first_name, last_name) values ('hi', 'bye') on conflict (id) do nothing
+
 -- try inserting something with the same id, but override the error and update only the email, first name and last name
+
+insert into person (first_name, last_name) values ('hi', 'bye') on conflict (id) do update set first_name = Excluded.first_name
