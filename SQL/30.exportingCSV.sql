@@ -1,0 +1,2 @@
+\copy (select * from person left join car on person.car_id = car.id) to 'C:/Users/Andrew/Desktop/results.csv' DELIMITER ',' CSV HEADER;
+-- by default delimiter is ',' so you don't need to include, but need to include header if you want headers. Default is no header

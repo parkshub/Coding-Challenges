@@ -1,3 +1,9 @@
+\d 
+\dt
+\c
+\l
+\i
+
 insert into
 
 distinct
@@ -43,3 +49,9 @@ update person set
 on conflict (id) do nothing
 
 on conflict (id) do update set blah = Exception.blah
+
+select * from person join car on person.car_id = car.id
+left join
+join car using ()
+
+\copy () to '' CSV HEADER
