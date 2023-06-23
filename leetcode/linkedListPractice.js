@@ -16,10 +16,10 @@ class Node {
     }
 }
 
-const a = new Node('a')
-const b = new Node('b')
-const c = new Node('c')
-const d = new Node('d')
+const a = new Node(2)
+const b = new Node(8)
+const c = new Node(3)
+const d = new Node(7)
 
 a.next = b
 b.next = c
@@ -72,4 +72,32 @@ const sumList = (head) => {
 const sumListRec = (head) => {
     if (head === null) { return 0 }
     return head.val + sumListRec(head.next)
+}
+
+
+const findTarget = (head, target) => {
+    if (head === null) { return false }
+    if (head.val === target) { return true }
+    return findTarget(head.next, target)
+}
+
+
+// !!!! TRY FIND INDEX WITHOUT HELPER FUNCTION
+const findIndex = (head, index) => {
+    let count = 0
+    
+    function helper(node, count, index) {
+        if (node === null) { return -1 }
+        if (count === index) { return node.val }
+        count += 1
+        return helper(node.next, count, index) 
+    }
+
+    return helper(head, count, index)
+}
+
+// 2, 8, 3, 7
+const sumListRecTest = (head) => {
+    if (head === null) { return 0 }
+    return head.val + sumListRecTest(head.next)
 }
