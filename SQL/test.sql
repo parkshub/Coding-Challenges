@@ -127,3 +127,7 @@ select * from person left join car using (car_uid) where car.* is null;
 
 -- important side notes
 -- if you want to use order by and offset/limit you have to call order by before offset or limit which makes sense
+
+-- you knew everything except the end of upserting
+-- looking through all the extensions
+-- and downloading the extension
