@@ -16,14 +16,24 @@ class Node {
     }
 }
 
-const a = new Node(2)
-const b = new Node(8)
-const c = new Node(3)
-const d = new Node(7)
+const a = new Node('a')
+const b = new Node('b')
+const c = new Node('c')
+const d = new Node('d')
 
 a.next = b
 b.next = c
 c.next = d
+
+const a2 = new Node(2)
+const b2 = new Node(8)
+const c2 = new Node(3)
+const d2 = new Node(7)
+
+a2.next = b2
+b2.next = c2
+c2.next = d2
+
 
 // both iterative and recursive time space complexity is O(n)
 
@@ -96,8 +106,51 @@ const findIndex = (head, index) => {
     return helper(head, count, index)
 }
 
-// 2, 8, 3, 7
-const sumListRecTest = (head) => {
-    if (head === null) { return 0 }
-    return head.val + sumListRecTest(head.next)
+// iterative t: 0(n)   s: 0(1)
+const reverseList = (head) => {
+    let prev = null
+    let current = head
+    while (current !== null) {
+        const next = current.next
+        current.next = prev
+        prev = current
+        current = next
+    }
+    return prev
 }
+// recursive version takes a little longer
+const reverseListRec = (head, prev = null) => {
+    if (head === null) return prev
+    const next = head.next
+    head.next = prev
+    return reverseListRec(next, head)
+}
+
+// Time complexity, since we have two lists it's O(min(n,m)) n and m being the length of the two lists
+// Space O(1)
+const zipperList = (head1, head2) => {
+    let tail = head1
+    let current1 = head1.next
+    let current2 = head2
+    let count = 0
+
+    while (current1 !== null && current2 !== null) {
+        if (count % 2 === 0) {
+            tail.next = current2
+            current2 = current2.next
+        } else {
+            tail.next = current1
+            current1 = current1.next
+        }
+        tail = tail.next
+        console.log(JSON.stringify(head1))
+        count += 1
+    }
+
+    if (current1 !== null) tail.next = current1
+    if (current2 !== null) tail.next = current2
+
+    return head1
+}
+
+console.log(JSON.stringify(zipperList(a, a2)))
