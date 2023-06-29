@@ -1,103 +1,135 @@
-class Node {
-    constructor(val) {
-        this.val = val
-        this.next = null
-    }
-}
+const graph = {
+    a: ['b', 'c'],
+    b: ['d'],
+    c: ['e'],
+    d: ['f'],
+    e: [],
+    f: []
+  }
 
-const a = new Node('a')
-const b = new Node('b')
-const c = new Node('c')
-const d = new Node('d')
+const breadthFirst = (graph, src) => {
+    const queue = [ src ]
 
-a.next = b
-b.next = c
-c.next = d
-
-const a2 = new Node(2)
-const b2 = new Node(8)
-const c2 = new Node(3)
-const d2 = new Node(7)
-
-a2.next = b2
-b2.next = c2
-c2.next = d2
-
-const sumListRec = (head) => {
-    if (head === null) { return 0 }
-    return head.val + sumListRec(head.next)
-}
-
-const sumList = (head) => {
-    let count = 0
-    let current = head
-
-    while(current !== null) {
-        count += current.val
-        current = current.next
-    }
-
-    return count
-}
-
-// return true if target exists and false otherwise
-const findTarget = (head, target) => {
-    if (head === null) { return false }
-    if (head.val === target) { return true }
-
-    return findTarget(head.next, target)
-}
-
-
-// return the index value of the target
-// if it doesn't exist, return -1
-const findByIndex = (head, index) => {
-    if (head === null) { return -1 }
-    if (index === 0) { return head.val }
-    
-    return findByIndex(head.next, index - 1)
-}
-
-const reverseList = (head) => {
-    let current = head
-    let prev = null
-
-    while (current !== null) {
-        const next = current.next
-        current.next = prev
-        prev = current
-        current = next
-    }
-
-    return prev
-}
-
-const zipperList = (head1, head2) => {
-    let tail = head1
-    let count = 0
-    let current1 = head1.next
-    let current2 = head2
-
-    while (current1 !== null && current2 !== null) {
-        if (count % 2 === 0) {
-            tail.next = current2
-            current2 = current2.next
-        } else {
-            tail.next = current1
-            current1 = current1.next
+    while (queue.length) {
+        const current = queue.shift()
+        console.log(current)
+        for (let neighbor of graph[current]) {
+            queue.push(neighbor)
         }
-        tail = tail.next
-        count +=1
     }
-    
-    tail.next = current1 || current2
-
-    return head1
-
-    // if (current1 !== null) tail.next = current1
-    // if (current2 !== null) tail.next = current2
-
-    // return head1
 }
 
-console.log(zipperList(a, a2))
+const depthFirst = (graph, src) => {
+    const stack = [ src ]
+
+    while(stack.length) {
+        const current = stack.pop()
+        console.log(current)
+
+        for (let neighbor of graph[current]) {
+            stack.push(neighbor)
+        }
+    }
+}
+
+const depthFirstRec = (graph, src) => {
+    console.log(src)
+    for (let neighbor of graph[src]) {
+        depthFirstRec(graph, neighbor)
+    }
+}
+
+const graph2 = {
+    f: ['g','i'],
+    g: ['h'],
+    h: [],
+    i: ['g','k'],
+    j: ['i'],
+    k: []
+  }
+
+const hasPath = (graph, src, dst) => {
+    if (src === dst) { return true }
+    for (let neighbor of graph[src]) {
+        if (hasPath(graph, neighbor, dst) === true) {
+            return true
+        }
+    }
+
+    return false
+}
+
+const edges = [
+    ['i', 'j'],
+    ['k', 'i'],
+    ['m', 'k'],
+    ['k', 'l'],
+    ['o', 'n']
+]
+
+const buildGraph = (edges) => {
+    const graph = {}
+
+    for (let edge of edges) {
+        const [ a, b ] = edge
+        graph[a] ? graph[a].push(b) : graph[a] = [b]
+        graph[b] ? graph[b].push(a) : graph[b] = [a]
+    }
+
+    return graph
+}
+
+const hasPath2 = (edges, src, dst) => {
+    const graph = buildGraph(edges)
+    const visited = new Set()
+
+    const helper = (graph, src, dst, visited) => {
+        if (visited.has(src)) { return false }
+        if (src === dst) { return true }
+
+        visited.add(src)
+
+        for (let neighbor of graph[src]) {
+            if (helper(graph, neighbor, dst, visited) === true) {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    return helper(graph, src, dst, visited)
+}
+
+const graph3 = {
+    0: [8, 1, 5],
+    1: [0],
+    5: [0, 8],
+    8: [0, 5],
+    2: [3, 4],
+    3: [2, 4],
+    4: [3, 2]
+}
+
+const connectedComponents = (graph) => { // answer should be 2
+    const visited = new Set()
+    let size = 0
+
+    const helper = (graph, node, visited) => {
+        if (visited.has(String(node))) { return false }
+        visited.add(String(node))
+        for (let neighbor of graph[node]) {
+            helper(graph, neighbor, visited)
+        }
+
+        return 1
+    }
+
+    for (let node in graph) {
+        size += helper(graph, node, visited)
+    }
+
+    return size
+}
+
+console.log(connectedComponents(graph3))
