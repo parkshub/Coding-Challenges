@@ -363,5 +363,8 @@ const zipperList = (head1, head2) => {
     }
     return head1
 }
-
-console.log(zipperList(a, a2))
+const arr = [8, 20]
+const mid = Math.floor((arr.length - 1) / 2)
+const left = arr.slice(0, mid)
+const right = arr.slice(mid)
+console.log(arr, left, right)
