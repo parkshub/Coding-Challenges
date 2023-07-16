@@ -23,3 +23,22 @@ const bubbleSort = (arr) => {
     }
     return arr
 }
+
+const bubbleSortTest = (arr) => {
+    let sorted;
+    while (sorted !== false) {
+        sorted = false
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] > arr[i + 1]) { 
+                let temp = arr[i]
+                arr[i] = arr[i + 1]
+                arr[i + 1] = temp
+                sorted = true
+            }
+        }
+    }
+
+    return arr
+}
+
+console.log(bubbleSortTest(arr))

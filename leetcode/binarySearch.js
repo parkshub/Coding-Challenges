@@ -45,3 +45,45 @@ const search = (arr, target, left, right) => {
     if (arr[middle] > target) { return search(arr, target, left, middle - 1) }
     if (arr[middle] < target) { return search(arr, target, middle + 1, right) }
 }
+
+
+// const arr = [-5, 2, 4, 6, 10]
+
+const binarySearchTest = (arr, target) => {
+    let left = 0
+    let right = arr.length - 1
+    let midpoint = Math.floor((right + left) / 2)
+
+    while (left <= right) {
+
+        if (arr[midpoint] === target) { return midpoint }
+        if (target > arr[midpoint]) { left = midpoint + 1 }
+        if (target < arr[midpoint]) { right = midpoint - 1 }
+        midpoint = Math.floor((right + left) / 2)
+    }
+
+    return -1
+}
+
+
+const binaryRecTest = (arr, target) => {
+    let left = 0
+    let right = arr.length - 1
+    return searchTest(arr, target, left, right)
+}
+
+const searchTest = (arr, target, left, right) => {
+    if (left > right) { 
+        console.log(left, right)
+        return -1 
+    }
+    
+    let midpoint = Math.floor((right + left) / 2)
+
+    if (arr[midpoint] === target) { return midpoint }
+
+    if (arr[midpoint] > target) { return searchTest(arr, target, left, midpoint - 1) }
+    if (arr[midpoint] < target) { return searchTest(arr, target, midpoint + 1, right) }
+}
+
+console.log(binaryRecTest(arr, -5))
