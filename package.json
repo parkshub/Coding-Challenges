@@ -1,0 +1,25 @@
+{
+  "type": "module",
+  "name": "coding-challenges",
+  "version": "1.0.0",
+  "description": "Find me on Codewars: https://www.codewars.com/users/parkshub",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parkshub/Coding-Challenges.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/parkshub/Coding-Challenges/issues"
+  },
+  "homepage": "https://github.com/parkshub/Coding-Challenges#readme",
+  "dependencies": {
+    "async": "^3.2.4",
+    "jsdom": "^22.1.0",
+    "node-fetch": "^3.3.1"
+  }
+}
