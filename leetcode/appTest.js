@@ -6,21 +6,17 @@ import jsdom from "jsdom";
 // console.log(dom.window.document.querySelector("p").textContent); // 'Hello world'
 // console.log('first')
 
-const url = 'https://tns4lpgmziiypnxxzel5ss5nyu0nftol.lambda-url.us-east-1.on.aws/challenge'
-const data = await jsdom.JSDOM.fromURL(url)
-// const doc = new jsdom.JSDOM(data)
-console.log(new jsdom.JSDOM(data))
+// const url = 'https://tns4lpgmziiypnxxzel5ss5nyu0nftol.lambda-url.us-east-1.on.aws/challenge'
+const url = 'https://wgg522pwivhvi5gqsn675gth3q0otdja.lambda-url.us-east-1.on.aws/616e63'
+let doc;
 
-// const test = doc.window.document.querySelector('ul')
+await fetch(url)
+  .then(response => {return response.text()})
+  .then(data => {
+    doc = document.createElement('template')
+    doc.innerHTML = data
+    console.log(doc.querySelector('body'))
+  })
+  
+
 // console.log(test)
-
-const dom = new jsdom.JSDOM(``, {
-    url: url,
-    referrer: url,
-    contentType: "text/html",
-    includeNodeLocations: true,
-    storageQuota: 10000000
-  });
-
-
-console.log(dom.window.document.querySelector('ul'))
