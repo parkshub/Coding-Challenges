@@ -9,7 +9,7 @@
         // since they are prototype object you would have to modify default object prototype DONT DO THIS
     // you can also use Object.create()
 
-const myProto = {
+const myProto = { // import part here is that this isn't a function it's an object with a method
     talk() {
         console.log(`hello i am ${this.name}`)
     }
@@ -40,3 +40,20 @@ console.log(person2.talk())
 
 // also FYI
     // if you're making a constructor function using this.param1 this.param2, you have to invoke new before creating a new variable
+
+// this isn't a fatory function, but it's a constructor function, so you would need to invoke new when creating a new object
+function personCreator(name, gender) {
+    this.name = name
+    this.gender = gender
+    this.talk = function() {
+        return `hi im ${name}`
+    }
+}
+
+const person = new personCreator('dude', 'male')
+
+personCreator.prototype.walk = function() {
+    return `eyy, im walking here ${this.name}`
+}
+
+p(person.walk())
