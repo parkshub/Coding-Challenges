@@ -155,7 +155,174 @@ const graph3 = {
 
 const connectedComponentsCount = (graph) => {
     let count = 0
-    
+    // go through the graph, then and once the inner function is done traversing, add one to outer var count
+    const visited = new Set()
 
+    for (let node in graph) {
+        if (search3(graph, visited, node) === true) {
+            count += 1
+        }
+    }
 
+    return count
 }
+
+function search3(graph, visited, node) {
+    if (visited.has(String(node))) { return false }
+
+    visited.add(String(node))
+
+    for (let neighbor of graph[node]) {
+        search3(graph, visited, neighbor)
+    }
+
+    return true
+}
+
+
+
+const largestComponent = (graph) => {
+    let largest = -Infinity
+    const visited = new Set()
+
+    for (let node in graph) {
+        let count = helper(graph, visited, node)
+        if (count > largest) { largest = count }
+    }
+
+    function helper(graph, visited, node) {
+        if (visited.has(String(node))) { return 0 }
+        
+        visited.add(String(node))
+
+        let count = 1
+
+        for (let neighbor of graph[node]) {
+            count += helper(graph, visited, neighbor)
+        }
+
+        return count
+    }
+
+    return largest
+}
+
+
+const edges2 = [
+    ['w', 'x'],
+    ['x', 'y'],
+    ['z', 'y'],
+    ['z', 'v'],
+    ['w', 'v']
+  ]
+
+function shortest(edges) {
+    let smallest = Infinity
+    const graph = buildGraph(edges)
+    console.log(graph)
+    const visited = new Set()
+
+    for (let node in graph) {
+        let size = helper(graph, visited, node)
+        if (size < smallest && size !== 0) { smallest = size }
+    }
+
+    function helper(graph, visited, node) {
+        if (visited.has(String(node))) { return 0 }
+        
+        let count = 1
+        
+        visited.add(String(node))
+        
+        for (let neighbor of graph[node]) {
+            count += helper(graph, visited, neighbor)    
+        }
+
+        return count
+    }
+
+    return smallest
+}
+
+const grid = [
+    ['W', 'L', 'W', 'W', 'W'],
+    ['W', 'L', 'W', 'W', 'W'],
+    ['W', 'W', 'W', 'L', 'W'],
+    ['W', 'W', 'L', 'L', 'W'],
+    ['L', 'W', 'W', 'L', 'L'],
+    ['L', 'L', 'W', 'W', 'W'],
+  ]
+
+function islandCount(grid) {
+    const visited = new Set()
+    let count = 0
+
+    for (let r = 0; r < grid.length; r++) {
+        for (let c = 0; c < grid[0].length; c++) {
+            if (search(grid, visited, r, c) === true) { count += 1 }
+        }
+    }
+
+    return count
+
+    function search(grid, visited, r, c) {
+        if (r > grid.length - 1 || r < 0) { return false }
+        if (c > grid[0].length - 1 || c < 0) { return false }
+        if (grid[r][c] === 'W') { return false }
+
+        const pos = `${r},${c}`
+
+        if (visited.has(pos)) { return false }
+
+        visited.add(pos)
+
+        search(grid, visited, r + 1, c)
+        search(grid, visited, r - 1, c)
+        search(grid, visited, r, c + 1)
+        search(grid, visited, r, c - 1)
+
+        return true
+    }
+}
+
+
+
+function smallestIsland(grid) {
+    const visited = new Set()
+    let smallest = Infinity
+
+    for (let r = 0; r < grid.length; r++) {
+        for (let c = 0; c < grid[0].length; c++) {
+            let count = helper(grid, visited, r, c)
+            if (count < smallest && count > 0) { smallest = count }
+        }
+    }
+
+    return smallest
+
+    function helper(grid, visited, r, c) {
+        if (r > grid.length - 1 || r < 0) { return 0 }
+        if (c > grid[0].length - 1 || c < 0) { return 0 }
+        if (grid[r][c] === 'W') { return 0 }
+
+        // console.log(r,c)
+
+        const pos = `${r},${c}`
+
+        if (visited.has(pos)) { return 0 }
+
+        visited.add(pos)
+
+        let count = 1
+
+        count += helper(grid, visited, r + 1, c)
+        count += helper(grid, visited, r - 1, c)
+        count += helper(grid, visited, r, c + 1)
+        count += helper(grid, visited, r, c - 1)
+
+        return count
+    }
+}
+
+console.log(smallestIsland(grid))
+
