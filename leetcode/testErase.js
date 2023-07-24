@@ -1,328 +1,113 @@
-const p = console.log
 
-const graph = {
-    a: ['b', 'c'],
-    b: ['d'],
-    c: ['e'],
-    d: ['f'],
-    e: [],
-    f: []
-  }
+// const arr = [-5, 2, 4, 6, 10]
 
-function breadthFirst(graph, source) {
-    const queue = [ source ]
+function binarySearch(arr, target) {
+    let left = 0
+    let right = arr.length - 1
 
-    while(queue.length) {
-        const current = queue.shift()
-        p(current)
+    while (left <= right) {
+        const midpoint = Math.floor((left + right) / 2)
 
-        for (let neighbor of graph[current]) {
-            queue.push(neighbor)
-        }
+        if (arr[midpoint] === target) { return midpoint }
+        if (arr[midpoint] > target) { right = midpoint - 1 }
+        if (arr[midpoint] < target) { left = midpoint + 1 }
+    }
+
+    return -1
+}
+
+function binarySearchRec(arr, target) {
+    const left = 0
+    const right = arr.length - 1
+
+    return helper(arr, target, left, right)
+
+    function helper(arr, target, left, right) {
+        const mid = Math.floor((left + right) / 2)
+
+        if (arr[mid] === target) { return mid }
+        if (arr[mid] > target) { return helper(arr, target, left, mid - 1)}
+        if (arr[mid] < target) { return helper(arr, target, mid + 1, right)}
+
+        return -1
     }
 }
 
-function depthFirst(graph, src) {
-    const stack = [ src ]
 
-    while (stack.length) {
-        const current = stack.pop()
-        p(current)
-        for (let neighbor of graph[current]) {
-            stack.push(neighbor)
-        }
-    }
-}
+const arr = [8, 20, -2, 4, -6]
 
-function depthFirstRec(graph, src) {
-    console.log(src)
-    for (let neighbor of graph[src]) {
-        depthFirstRec(graph, neighbor)
-    }
-}
+function bubbleSort(arr) {
+    let sorted;
 
-const graph2 = {
-    f: ['g','i'],
-    g: ['h'],
-    h: [],
-    i: ['g','k'],
-    j: ['i'],
-    k: []
-  }
-
-function hasPathDepth(graph, src, dst) {
-    const stack = [ src ]
-
-    while(stack.length) {
-        const current = stack.pop()
-        for (let neighbor of graph[current]) {
-            // p(neighbor)
-            if (neighbor === dst) { return true }
-            stack.push(neighbor)
-        }
-    }
-
-    return false
-}
-
-function hasPathRec(graph, src, dst) {
-    if (src === dst) { return true }
-
-    for (let neighbor of graph[src]) {
-        if (hasPathRec(graph, neighbor, dst) === true) {
-            return true
-        }
-    }
-
-    return false
-}
-
-const edges = [
-    ['i', 'j'],
-    ['k', 'i'],
-    ['m', 'k'],
-    ['k', 'l'],
-    ['o', 'n']
-]
-
-function buildGraph(edges) {
-    const graph = {}
-    
-    for (let edge of edges) {
-        const [ a, b ] = edge
-        
-        graph[a] ? graph[a].push(b) : graph[a] = [b]
-        graph[b] ? graph[b].push(a) : graph[b] = [a]
-    }
-
-    return graph
-}
-
-function unHasPath(edges, src, dst) {
-    const graph = buildGraph(edges)
-    const visited = new Set()
-    const stack = [ src ]
-
-    while (stack.length) {
-        const current = stack.pop()
-        
-        if ( current === dst ) { return true }
-        for (let neighbor of graph[current]) {
-            if (!visited.has(neighbor)) {
-                visited.add(neighbor)
-                stack.push(neighbor)
+    while (sorted !== false) {
+        sorted = false
+        for (let i = 0; i < arr.length; i++) {
+            const j = i + 1
+            if (arr[i] > arr[j]) {
+                const temp = arr[i]
+                arr[i] = arr[j]
+                arr[j] = temp
+                sorted = true
             }
         }
     }
 
-    return false
+    return arr
 }
 
-function unHasPathRec(edges, src, dst) {
-    const graph = buildGraph(edges)
-    const visited = new Set()
+// const arr = [8, 20, -2, 4, -6]
 
-    return search(graph, src, dst, visited)
+function insertionSort(arr) {
+    for (let i = 1; i < arr.length; i++) {
+        let j = i - 1
+        let num = arr[i]
+        while (num < arr[j] && j >= 0) {
+            arr[j + 1] = arr[j]
+            j--
+        }
+        arr[j + 1] = num
+    }
+
+    return arr
 }
 
-function search(graph, node, dst, visited) {
-    if (visited.has(node)) { return false }
-    if (node === dst) { return true }
+
+function mergeSort(arr) {
+    if (arr.length < 2) { return arr }
+
+    const mid = Math.floor(arr.length / 2)
+    const left = arr.slice(0, mid)
+    const right = arr.slice(mid)
+
+    return merge(mergeSort(left), mergeSort(right))
+}
+
+function merge(left, right) {
+    let sortedArr = []
+
+    while (left.length && right.length) {
+        if (left[0] < right[0]) { sortedArr.push(left.shift()) }
+        if (left[0] > right[0]) { sortedArr.push(right.shift()) }
+    }
+
+    return [...sortedArr, ...left, ...right]
+}
+
+
+function quickSort(arr) {
+    if (arr.length < 2) { return arr }
     
-    visited.add(node)
+    const pivot = arr[arr.length - 1]
 
-    for (let neighbor of graph[node]) {
-        if (search(graph, neighbor, dst, visited) === true) {
-            return true
-        }        
+    const left = []
+    const right = []
+
+    for (let i of arr) {
+        if (i < pivot) { left.push(i) }
+        if (i > pivot) { right.push(i) }
     }
 
-    return false
+    return [...quickSort(left), pivot, ...quickSort(right)]
 }
 
-p(unHasPathRec(edges, 'i', 'm'))
-
-
-const graph3 = {
-    0: [8, 1, 5],
-    1: [0],
-    5: [0, 8],
-    8: [0, 5],
-    2: [3, 4],
-    3: [2, 4],
-    4: [3, 2]
-  }
-
-const connectedComponentsCount = (graph) => {
-    let count = 0
-    // go through the graph, then and once the inner function is done traversing, add one to outer var count
-    const visited = new Set()
-
-    for (let node in graph) {
-        if (search3(graph, visited, node) === true) {
-            count += 1
-        }
-    }
-
-    return count
-}
-
-function search3(graph, visited, node) {
-    if (visited.has(String(node))) { return false }
-
-    visited.add(String(node))
-
-    for (let neighbor of graph[node]) {
-        search3(graph, visited, neighbor)
-    }
-
-    return true
-}
-
-
-
-const largestComponent = (graph) => {
-    let largest = -Infinity
-    const visited = new Set()
-
-    for (let node in graph) {
-        let count = helper(graph, visited, node)
-        if (count > largest) { largest = count }
-    }
-
-    function helper(graph, visited, node) {
-        if (visited.has(String(node))) { return 0 }
-        
-        visited.add(String(node))
-
-        let count = 1
-
-        for (let neighbor of graph[node]) {
-            count += helper(graph, visited, neighbor)
-        }
-
-        return count
-    }
-
-    return largest
-}
-
-
-const edges2 = [
-    ['w', 'x'],
-    ['x', 'y'],
-    ['z', 'y'],
-    ['z', 'v'],
-    ['w', 'v']
-  ]
-
-function shortest(edges) {
-    let smallest = Infinity
-    const graph = buildGraph(edges)
-    console.log(graph)
-    const visited = new Set()
-
-    for (let node in graph) {
-        let size = helper(graph, visited, node)
-        if (size < smallest && size !== 0) { smallest = size }
-    }
-
-    function helper(graph, visited, node) {
-        if (visited.has(String(node))) { return 0 }
-        
-        let count = 1
-        
-        visited.add(String(node))
-        
-        for (let neighbor of graph[node]) {
-            count += helper(graph, visited, neighbor)    
-        }
-
-        return count
-    }
-
-    return smallest
-}
-
-const grid = [
-    ['W', 'L', 'W', 'W', 'W'],
-    ['W', 'L', 'W', 'W', 'W'],
-    ['W', 'W', 'W', 'L', 'W'],
-    ['W', 'W', 'L', 'L', 'W'],
-    ['L', 'W', 'W', 'L', 'L'],
-    ['L', 'L', 'W', 'W', 'W'],
-  ]
-
-function islandCount(grid) {
-    const visited = new Set()
-    let count = 0
-
-    for (let r = 0; r < grid.length; r++) {
-        for (let c = 0; c < grid[0].length; c++) {
-            if (search(grid, visited, r, c) === true) { count += 1 }
-        }
-    }
-
-    return count
-
-    function search(grid, visited, r, c) {
-        if (r > grid.length - 1 || r < 0) { return false }
-        if (c > grid[0].length - 1 || c < 0) { return false }
-        if (grid[r][c] === 'W') { return false }
-
-        const pos = `${r},${c}`
-
-        if (visited.has(pos)) { return false }
-
-        visited.add(pos)
-
-        search(grid, visited, r + 1, c)
-        search(grid, visited, r - 1, c)
-        search(grid, visited, r, c + 1)
-        search(grid, visited, r, c - 1)
-
-        return true
-    }
-}
-
-
-
-function smallestIsland(grid) {
-    const visited = new Set()
-    let smallest = Infinity
-
-    for (let r = 0; r < grid.length; r++) {
-        for (let c = 0; c < grid[0].length; c++) {
-            let count = helper(grid, visited, r, c)
-            if (count < smallest && count > 0) { smallest = count }
-        }
-    }
-
-    return smallest
-
-    function helper(grid, visited, r, c) {
-        if (r > grid.length - 1 || r < 0) { return 0 }
-        if (c > grid[0].length - 1 || c < 0) { return 0 }
-        if (grid[r][c] === 'W') { return 0 }
-
-        // console.log(r,c)
-
-        const pos = `${r},${c}`
-
-        if (visited.has(pos)) { return 0 }
-
-        visited.add(pos)
-
-        let count = 1
-
-        count += helper(grid, visited, r + 1, c)
-        count += helper(grid, visited, r - 1, c)
-        count += helper(grid, visited, r, c + 1)
-        count += helper(grid, visited, r, c - 1)
-
-        return count
-    }
-}
-
-console.log(smallestIsland(grid))
-
+console.log(quickSort(arr))
