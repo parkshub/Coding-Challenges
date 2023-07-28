@@ -105,6 +105,7 @@ class MaxHeap {
 
     swap(index1, index2) {
         [this.data[index1], this.data[index2]] = [this.data[index2], this.data[index1]]
+        console.log(`this is what happened after the swap ${this.data}`)
     }
 
     insert(value) {
@@ -114,12 +115,60 @@ class MaxHeap {
 
     siftUp(currentIndex) {
         let currentValue = this.data[currentIndex]
-        let [parentIndex, parentValue] = this.getParent(currentIndex)
+        let parent = this.getParent(currentIndex)
 
-        while(currentValue > parentValue) {
-            this.swap(currentIndex, parentIndex)
-            currentIndex = parentIndex
-            let [parentIndex, parentValue] = this.getParent(currentIndex)
+        console.log(parent)
+
+        while(parent[1] !== undefined && currentValue > parent[1]) {
+            console.log('i ran')
+            this.swap(currentIndex, parent[0])
+            currentIndex = parent[0]
+            parent = this.getParent(currentIndex) // the issue was that i put let in front of this
+        }
+    }
+
+    pull() {
+        if (this.data.length < 2) { return }
+        
+        let lastIndex = this.data.length - 1
+        this.swap(lastIndex, 0)
+        this.data.pop()
+        console.log('this is what happened before siftdown', this.data)
+        this.siftDown(0)
+    }
+
+    siftDown(currentIndex) {
+        let currentValue = this.data[currentIndex]
+        
+        let leftChild = this.getLeftChild(currentIndex)
+        let righChild = this.getRightChild(currentIndex)
+
+        while (currentValue < leftChild[1] || currentValue < righChild[1]) {
+            if (leftChild[1] >= righChild[1]) { 
+                this.swap(currentIndex, leftChild[0])
+                currentIndex = leftChild[0]
+                leftChild = this.getLeftChild(currentIndex)
+                righChild = this.getRightChild(currentIndex)
+            } else {
+                this.swap(currentIndex, righChild[0])
+                currentIndex = righChild[0]
+                leftChild = this.getLeftChild(currentIndex)
+                righChild = this.getRightChild(currentIndex)
+            }
+        }
+
+
+    }
+
+    update(currentIndex, newValue) {
+        this.data[currentIndex] = newValue
+
+        let parent = this.getParent(currentIndex)
+
+        if (newValue > parent[1]) {
+            this.siftUp(currentIndex)
+        } else {
+            this.siftDown(currentIndex)
         }
     }
     // get parent, get child left and right, sift up, sift down
@@ -130,5 +179,14 @@ class MaxHeap {
 
 const heap = new MaxHeap()
 heap.insert(5)
-// heap.insert(100)
-console.log(heap.table)
+heap.insert(100)
+heap.insert(50)
+heap.insert(60)
+heap.insert(1000)
+console.log('here i pull')
+
+console.log(heap.data)
+
+heap.update(1, 2)
+
+console.log(heap.data)
