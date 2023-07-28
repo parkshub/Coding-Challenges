@@ -69,13 +69,3 @@ class TestHash {
         }
     }
 }
-
-const test = new TestHash(50)
-
-test.set('name', 'andrew')
-test.set('mane', 'bandrew')
-
-test.remove('name')
-console.log(test.get('mane'))
-
-test.display()
