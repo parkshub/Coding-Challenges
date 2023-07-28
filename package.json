@@ -19,6 +19,7 @@
   "homepage": "https://github.com/parkshub/Coding-Challenges#readme",
   "dependencies": {
     "async": "^3.2.4",
+    "bcryptjs": "^2.4.3",
     "dom-parser": "^0.1.6",
     "jsdom": "^22.1.0",
     "node-fetch": "^3.3.1"

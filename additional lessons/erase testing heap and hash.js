@@ -1,3 +1,5 @@
+import bcryptjs from "bcryptjs"
+
 // main functions of hash
 // hash, set, get, remove, display
 
@@ -55,15 +57,22 @@ class Hash {
     delete(key) {
         const index = this.hash(key)
         let bucket = this.table[index]
+        console.log(bucket)
 
-        if (!bucket) { return }
-        if (bucket.length <= 1) { bucket = undefined }
-        
-        let entry = bucket.find(item => item[0] === key)
-        if (entry) {
-            entry = undefined
+        // if (!bucket) { return }
+
+        // if (bucket.length <= 1) { 
+            // this.table.splice(this.table.indexOf(bucket), 1)
+            // bucket = undefined
+            // return
+        // }
+
+        if (bucket) {        
+            let entry = bucket.find(item => item[ 0 ] === key)
+            if (entry) {
+                bucket.splice(bucket.indexOf(entry), 1)
+            }
         }
-        return
     }
 
     display() {
@@ -71,14 +80,55 @@ class Hash {
     }
 }
 
-const hash = new Hash(20)
+class MaxHeap {
+    constructor() {
+        this.data = []
+    }
 
-hash.set('name', 'Andrew')
+    getParent(currentIndex) {
+        const parentIndex = Math.floor((currentIndex - 1) / 2)
+        const parentValue = this.data[parentIndex]
+        return [parentIndex, parentValue]
+    }
 
-hash.set('mane', 'Andrew')
+    getLeftChild(currentIndex) {
+        const leftChildIndex = currentIndex * 2 + 1
+        const leftChildValue = this.data[leftChildIndex]
+        return [leftChildIndex, leftChildValue]
+    }
 
-// console.log(hash.table)
+    getRightChild(currentIndex) {
+        const rightChildIndex = currentIndex * 2 + 2
+        const rightChildValue = this.data[rightChildIndex]
+        return [rightChildIndex, rightChildValue]
+    }
 
-hash.set('name', 'andy')
-hash.delete('name')
-console.log(hash.table)
+    swap(index1, index2) {
+        [this.data[index1], this.data[index2]] = [this.data[index2], this.data[index1]]
+    }
+
+    insert(value) {
+        this.data.push(value)
+        this.siftUp(this.data.length - 1)
+    }
+
+    siftUp(currentIndex) {
+        let currentValue = this.data[currentIndex]
+        let [parentIndex, parentValue] = this.getParent(currentIndex)
+
+        while(currentValue > parentValue) {
+            this.swap(currentIndex, parentIndex)
+            currentIndex = parentIndex
+            let [parentIndex, parentValue] = this.getParent(currentIndex)
+        }
+    }
+    // get parent, get child left and right, sift up, sift down
+    // insert, get max, extract max or delete, update
+    // when inserting you always add it to the end and then reorder the tree
+    // when you delete, you always delete the top and reorder the tree
+}
+
+const heap = new MaxHeap()
+heap.insert(5)
+// heap.insert(100)
+console.log(heap.table)
