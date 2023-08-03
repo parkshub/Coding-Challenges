@@ -1,14 +1,22 @@
-function findMissingLetter(array)
-{
-  let code = array[0].charCodeAt() + 1
-  let charCode;
-
-  for (let i = 1; i<array.length; i++) {
-      charCode = array[i].charCodeAt()
-
-      if (charCode != code) {
-          return String.fromCharCode(code)
-      }
-      code += 1
+function getLengthOfMissingArray(arrayOfArrays) {
+    
+    if (arrayOfArrays===null || arrayOfArrays.includes(null) ||!arrayOfArrays.length) {
+      return 0
+    }
+    
+    let a = arrayOfArrays.sort((x,y) =>x.length - y.length)
+    let first = a[0].length
+    
+    for (let i = 0; i < a.length; i++) {
+            
+        if(a[i].length === 0) {
+          return 0
+        } 
+      
+        if(a[i].length !== first) {
+            return first
+        }
+        first++
+    }
   }
-}
+  
