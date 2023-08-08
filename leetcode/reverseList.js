@@ -4,18 +4,22 @@ var reverseList = function(head) {
     let prev = null
     let current = head
 
-    while (current !== null) { 
-        let next = current.next
+    while (current !== null) {
+        const next = current.next
         current.next = prev
-        current = current.nex
-        prev = head.next
+        prev = current
+        current = next
     }
 
-    return current
-
+    return prev
 };
 
-console.log(reverseList(list))
+const reverseListRec = (head, prev = null) => {
+    if (!head) { return prev }
+    const next = head.next
+    head.next = prev
+    return reverseListRec(next, head)
+}
 
 //  null    1     2     3
 //  prev   curr  next
