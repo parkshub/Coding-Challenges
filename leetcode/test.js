@@ -367,3 +367,12 @@ const arr = [8, 20]
 
 
 console.log(arr.slice(0,0))
+
+
+const test = [1,2,3,4,5,6]
+
+for (let i = 0; i < test.length; i++) {
+    console.log(i)
+    test.pop()
+}
+
