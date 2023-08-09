@@ -24,7 +24,7 @@ function createPerson (name) {
 }
 
 const person1 = createPerson('Dude')
-person1.talk()
+// person1.talk()
 
 // factory functions give you data privacy
     // you dont need to define the variable and still use it and you dont have to worry about accidentally changing it and messing things up
@@ -36,7 +36,7 @@ function createPerson2(name) {
 }
 
 const person2 = createPerson2('Dude2')
-console.log(person2.talk())
+// console.log(person2.talk())
 
 // also FYI
     // if you're making a constructor function using this.param1 this.param2, you have to invoke new before creating a new variable
@@ -56,4 +56,4 @@ personCreator.prototype.walk = function() {
     return `eyy, im walking here ${this.name}`
 }
 
-p(person.walk())
+console.log(person.walk())
