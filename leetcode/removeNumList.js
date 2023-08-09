@@ -1,20 +1,48 @@
-// const list = {"val":1,"next":{"val":2,"next":{"val":3,"next": {"val": 6, "next": {"val": 4, "next": {"val": 6, "next": null}}}}}}
-const list = {"val":1,"next":{"val":2,"next": null}}
+// // const list = {"val":1,"next":{"val":2,"next":{"val":3,"next": {"val": 6, "next": {"val": 4, "next": {"val": 6, "next": null}}}}}}
+// const list = {"val":1,"next":{"val":2,"next": null}}
 
 
-function traverse(head) {
-    if (head === null) { return }
-    console.log(head.val)
-    return traverse(head.next)
-}
+// function traverse(head) {
+//     if (head === null) { return }
+//     console.log(head.val)
+//     return traverse(head.next)
+// }
 
 
-var removeElements = function(head, val) {
+// var removeElements = function(head, val) {
 
-    while (head !== null) {
+//     while (head !== null) {
+//         if (head.val === val) {
+//             head = head.next
+//         } 
+//         else {
+//             break
+//         }
+//     }
+
+//     let current = head
+
+//     while (current && current.next) {
+//         if (current.next.val === val) {
+//             current.next = current.next.next
+//         } 
+//         else {
+//             current = current.next
+//         }
+//     }
+
+//     return head
+// };
+
+const list = {"val":1,"next":{"val":2,"next":{"val":3,"next": {"val": 6, "next": {"val": 4, "next": {"val": 6, "next": null}}}}}}
+
+
+function remove(head, val) {
+    
+    while(head !== null) {
         if (head.val === val) {
             head = head.next
-        } 
+        }
         else {
             break
         }
@@ -25,11 +53,11 @@ var removeElements = function(head, val) {
     while (current && current.next) {
         if (current.next.val === val) {
             current.next = current.next.next
-        } 
-        else {
-            current = current.next
         }
+        current = current.next
     }
 
     return head
-};
+}
+
+console.log(JSON.stringify(remove(list, 6)))
