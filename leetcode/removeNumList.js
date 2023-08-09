@@ -59,5 +59,3 @@ function remove(head, val) {
 
     return head
 }
-
-console.log(JSON.stringify(remove(list, 6)))
