@@ -21,29 +21,21 @@
 //     return reverseListRec(next, head)
 // }
 
-// //  null    1     2     3
-// //  prev   curr  next
 
-const list = {"val":1,"next":{"val":2,"next":{"val":3,"next":null}}}
-
-function reverse(head) {
-    let current = null
-    let next = head
-
-    while (current !== null) {
-        let next = current.next
-        current.next = prev
-        prev = current
-        current = next
+function removeElement(head, val) {
+    while (head && head.val === val) {
+        head = head.next
     }
 
-    return prev
-}
+    let current = head
 
+    while (current && current.next) {
+        if (current.next.val === val) {
+            current.next = current.next.next
+        } else {
+            current = current.next
+        }
+    }
 
-function reverseRec(head, prev = null) {
-    if (head === null) { return prev }
-    let next = head.next
-    head.next = prev
-    return reverseRec(next, head)
+    return head
 }
