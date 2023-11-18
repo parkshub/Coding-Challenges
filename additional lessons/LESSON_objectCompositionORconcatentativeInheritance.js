@@ -68,4 +68,22 @@ function monsterCreator2(name) {
 }
 
 const test = monsterCreator2('dude')
-p(test.fly())
+
+
+function MonsterCreator4(name, type) {
+    this.name = name
+    this.type = type
+    this.fly = function() {
+        return `${this.name} is flying`
+    }
+}
+
+const monster73 = new MonsterCreator4('dyyyde', 'monsta')
+
+console.log(monster73.fly())
+
+MonsterCreator4.prototype.define = function() {
+    return `${this.type} is the type`
+}
+
+console.log(monster73.define())

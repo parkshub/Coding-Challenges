@@ -53,3 +53,53 @@ const personCreator2 = (fn, ln) => {
 const person2 = personCreator2('asdf', 'asdf')
 
 console.log(person2.talk())
+
+
+
+
+
+function fly() {
+    return `${this.name} is flying`
+}
+function creator(name) {
+    return {
+        name,
+        fly
+    }
+}
+
+const monsterProto = {
+    fly() {
+        return `${this.name} is flying`
+    },
+    talk() {
+        return `${this.name} is talking`
+    }
+}
+
+function monsterCreator(name) {
+    let monster = Object.create(monsterProto)
+    monster.name = name
+    return monster
+}
+
+const flying = ({name}) => {
+    return {
+        fly() {
+            return `${name} is flying`
+        },
+        flyHigh() {
+            return `${name} is flying high`
+        }
+    }
+}
+
+function monsterCreator3(name, type) {
+    let monster = {name, type}
+    return {
+        ...monster,
+        ...flying(monster)
+    }
+}
+
+let test = monsterCreator3('dude21', 'awesome')
