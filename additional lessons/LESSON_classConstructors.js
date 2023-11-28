@@ -25,6 +25,7 @@ class Car {
 
     set something(num) { // this allows the change of the secret variable #Something
         return this.#Something = num
+        // question while reviewing this is...does this also work for non-secret variables
     }
 
     get price() { // instead of calling test._price you can know do test.price to get the price
