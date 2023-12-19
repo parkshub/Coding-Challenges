@@ -62,13 +62,11 @@ class Hash {
         }
 
         let idx = bucket.findIndex(x => x[0] == key)
-        console.log('this is idx', idx)
-        console.log('this is bucket', bucket)
 
-        console.log(bucket.slice(0,idx))
-        console.log(bucket.slice(idx + 1))
 
-        bucket.splice(idx, 1)
+        this.table[hashed] = bucket.filter(x => x[0] !== key)
+
+        // bucket.splice(idx, 1)
         // this.table[hashed] = bucket.slice(0,idx) + bucket.slice(idx + 1)
         // this.table[hashed] = bucket
     }

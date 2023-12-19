@@ -13,10 +13,10 @@ const mergeSort = (arr) => {
         return arr
     }
 
-    const mid = Math.floor((arr.length) / 2) // this part is very important doing length - 1 will create an endless loop when the given array is length of 2 since left will be empty and right will still contain both elements
+    const mid = Math.floor((arr.length) / 2) // this part is very important, doing length - 1 will create an endless loop when the given array is length of 2 since left will be empty and right will still contain both elements
     const left = arr.slice(0, mid)
     const right = arr.slice(mid)
-    console.log(arr, left, right)
+    // console.log(arr, left, right)
 
     return merge(mergeSort(left), mergeSort(right))
 }
@@ -33,7 +33,9 @@ const merge = (left, right) => {
     }
 
     return [...sortedArr, ...left, ...right]
+    // it doesn't matter if it's left or right, we're just doing this to concat the leftover arr to our response array when one of the array becomes empty
 }
+
 
 const mergeSortTest = (arr) => {
     if (arr.length < 2) { return arr }
@@ -56,4 +58,4 @@ const mergeTest = (left, right) => {
     return [...sortedArr, ...left, ...right]
 }
 
-console.log(mergeSortTest(arr))
+// console.log(mergeSortTest(arr))

@@ -222,7 +222,7 @@ const graph3 = {
 
 
 
-// How many connections?
+// How many connected components?
 
 const connectedComponentsCount = (graph) => {
   const visited = new Set()
