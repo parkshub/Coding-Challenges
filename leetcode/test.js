@@ -20,7 +20,7 @@ class Node {
   c.right = f
 
 
-const arr = [8, 20, -2, 4, -6]
+// const arr = [8, 20, -2, 4, -6]
 
 // quick sort practice
 
@@ -106,4 +106,21 @@ function depth_rec(root) {
     return
 }
 
-depth_rec(a)
+
+function max_p(root) {
+    if (root === null) return 0
+    let largest = Math.max(max_p(root.left), max_p(root.right))
+    return root.val + largest
+}
+
+function max_p2(root) {
+    if (root === null) return 0
+    
+    let left = max_p2(root.left)
+    let right = max_p2(root.right)
+
+    return Math.max(left + root.val, right + root.val)
+}
+
+
+console.log(max_p2(a))

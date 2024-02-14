@@ -39,8 +39,8 @@ function maxRootPathV1(root) {
 
 function maxRootPathV2(root) {
     if (root === null) return 0;
-    let left = maxRootPathV1(root.left)
-    let right = maxRootPathV1(root.right)
+    let left = maxRootPathV2(root.left)
+    let right = maxRootPathV2(root.right)
     return Math.max(root.val + left, root.val + right)
 }
 
@@ -60,18 +60,7 @@ function treeMinV1(root) {
     return helper(root)
 }
 
-function treeMinV2(root) {
-    let stack = [root]    
-    let min = Infinity
-    
-    while(stack.length) {
-        root = stack.pop()
-        if (root.right) stack.push(root.right);
-        if (root.left) stack.push(root.left);
-        min = Math.min(root.val, min)
-    }
-    return min
-}
+
 
 function treeSumV1(root) {
     if (root === null) return 0;
