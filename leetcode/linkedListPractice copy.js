@@ -25,16 +25,18 @@ a.next = b
 b.next = c
 c.next = d
 
-const a2 = new Node(2)
-const b2 = new Node(8)
-const c2 = new Node(3)
-const d2 = new Node(7)
+const a2 = new Node(1)
+const b2 = new Node(1)
+const c2 = new Node(2)
+const d2 = new Node(3)
+const e2 = new Node(3)
 
 a2.next = b2
 b2.next = c2
 c2.next = d2
+d2.next = e2
 
-console.log(a.next.next)
+// console.log(a.next.next)
 
 
 function traverse(node) {
@@ -57,3 +59,86 @@ function reverseList(head) {
 
     console.log(prev)
 }
+
+
+
+function traverse1(node) {
+    if (node === null) { return }
+    console.log(node.val)
+    traverse(node.next)
+}
+
+
+// prev
+// current
+// next
+// a - b - c - d
+function reverse(node) {
+    let prev = null
+    let current = node
+
+    while (current !== null) {
+        let next = current.next
+        current.next = prev
+        prev = current
+        current = next
+    }
+    return prev
+}
+
+// a - b - c - d
+// prev = null
+// current = a, b, c, d
+// next = b, c, d
+
+
+// console.log(9||null)
+
+
+ function removeElement(val, head) {
+    if (head === null) { return [] }
+    
+
+    while (head.val == val) {
+        console.log('first')
+        head = head.next
+    }
+
+    let current = head
+
+
+    while (current && current.next) {
+        if (current.next.val === val) {
+            current.next = current.next.next
+        }
+        else {
+            current = current.next
+        }
+    }
+
+    return head
+ }
+
+
+
+ //1, 1, 2, 3, 3
+
+function removeDuplicate(head) {
+    if (head === null) { return null }
+
+    let dupes = [ ]
+    let current = {'val': null, 'next': head}
+
+    while (current && current.next) {
+        if (dupes.includes(current.next.val)) {
+            current.next = current.next.next
+        } else {
+            dupes.push(current.val)
+            current = current.next
+        }
+    }
+
+    return head
+}
+
+console.log(JSON.stringify(removeDuplicate(a2)))

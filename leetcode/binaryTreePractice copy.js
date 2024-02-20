@@ -149,4 +149,44 @@ function maxDepthV1(root) {
 
 
 
-// do min depth braedth first and recursive
+// do min depth breadth first and recursive
+
+function minDepthIter(root) {
+    if (root === null) { return 0 }
+
+    let queue = [ root ]
+    let level = 1
+
+    while (queue.length) {
+        console.log('first')
+        for (let i = 0; i < queue.length; i++) {
+            console.log('second')
+            let current = queue.shift()
+            
+            if (current.left === null && current.right === null) {
+                console.log('last')
+                return level + 1
+            }
+
+            if (current.left) { queue.push(current.left) }
+            if (current.right) { queue.push(current.right) }
+        }
+
+        level += 1
+    }
+
+
+    return level
+}
+
+
+function minDepthRec(root) {
+    if (root === null) { return 0 }
+    if (root.left === null) { return minDepthRec(root.right) + 1 }
+    if (root.right === null) { return minDepthRec(root.left) + 1 }
+    if (root.right && root.left) { return Math.min(minDepthRec(root.left), minDepthRec(root.right)) + 1 }
+}
+
+console.log(minDepthRec(a))
+
+

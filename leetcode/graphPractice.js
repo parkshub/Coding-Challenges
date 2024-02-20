@@ -229,7 +229,7 @@ const connectedComponentsCount = (graph) => {
   let count = 0
 
   for (let node in graph) {
-    console.log(visited)
+    // console.log(visited)
     if (explore(graph, node, visited) === true) {
       count +=1
     }
@@ -251,6 +251,8 @@ const explore = (graph, current, visited) => {
 
   return true
 }
+
+// console.log(connectedComponentsCount(graph3))
 
 const connectedComponentsCountIterative= (graph) => {
   const visited = new Set()
@@ -305,6 +307,8 @@ const exploreSize = (node, graph, visited) => {
   return size
 }
 
+console.log(largestComponent(graph3))
+
 // shortest path algorithm
 // breadth first is ideal, think about why that is
 // since we're doing breadth first, we do queue and cant do recursive
@@ -338,7 +342,10 @@ const shortest = (edges, nodeA, nodeB) => {
   return -1
 }
 
-console.log(shortest(edges2, 'w', 'z'))
+
+console.log(shortest(graph))
+
+// console.log(shortest(edges2, 'w', 'z'))
 
 
 // number of islands
