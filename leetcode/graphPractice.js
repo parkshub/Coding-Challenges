@@ -442,3 +442,22 @@ const exploreIslandSize = (graph, r, c, visited) => {
 
   return size
 }
+
+
+const a = 
+{
+  "Version": "2000-01-01",
+  "Statement": [
+    {
+      "Sid": "PublicRead",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": [
+        "arn:aws:s2:::examplebucket/*"
+      ]
+    }
+  ]
+}
