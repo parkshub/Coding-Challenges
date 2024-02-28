@@ -69,124 +69,28 @@ function breadth(root) {
     }
 }
 
-
-function maxPath(root) {
-    if (root === null) { return 0 }
-
-    let current = root.val + Math.max(maxPath(root.left), maxPath(root.right))
-
-    return current
-}
-
-function maxPathV2(root) {
-    if (root === null) { return 0 }
-
-    let left = maxPathV2(root.left)
-    let right = maxPathV2(root.right)
-
-    return root.val + Math.max(left, right)   
-}
+// do max and min depth
+// do balanced tree
 
 
-function minPath(root) {
-    if (root === null) { return 0 }
-
-    let current = root.val + Math.min(maxPath(root.left), maxPath(root.right))
-
-    return current
-}
-
-function includes(root, target) {
+function breadthTest(root) {
     if (root === null) { return }
 
     let queue = [ root ]
 
     while (queue.length) {
         let current = queue.shift()
-
-        if (current.val === target) { return true }
+        console.log(current.val)
 
         if (current.left) { queue.push(current.left) }
         if (current.right) { queue.push(current.right) }
     }
-
-    return false
-}
-
-function includesV2(root, target) {
-    if (root === null) { return false }
-    if (root.val === target) { return true }
-
-    if (includesV2(root.left, target) === true) { return true }
-    if (includesV2(root.right, target) === true) { return true }
-
-    return false
-}
-
-function maxDepthV1(root) {
-    let max = -Infinity
-
-    let stack = [ [ root, 1 ] ]
-
-    while(stack.length) {
-        console.log(stack)
-        let current = stack.pop()
-        console.log(current[0].val)
-
-        max = Math.max(current[1], max)
-
-        if (current[0].left) {
-            stack.push([ current[0].left, current[1] + 1 ])
-        }
-
-        if (current[0].right) {
-            stack.push([ current[0].right, current[1] + 1 ])
-        }
-    }
-
-    return max
 }
 
 
-
-// do min depth breadth first and recursive
-
-function minDepthIter(root) {
-    if (root === null) { return 0 }
-
-    let queue = [ root ]
-    let level = 1
-
-    while (queue.length) {
-        console.log('first')
-        for (let i = 0; i < queue.length; i++) {
-            console.log('second')
-            let current = queue.shift()
-            
-            if (current.left === null && current.right === null) {
-                console.log('last')
-                return level + 1
-            }
-
-            if (current.left) { queue.push(current.left) }
-            if (current.right) { queue.push(current.right) }
-        }
-
-        level += 1
-    }
-
-
-    return level
+function maxTest(node) {
+    if (node === null) { return 0 }
+    return Math.max(maxTest(node.left), maxTest(node.right)) + 1
 }
 
-
-function minDepthRec(root) {
-    if (root === null) { return 0 }
-    if (root.left === null) { return minDepthRec(root.right) + 1 }
-    if (root.right === null) { return minDepthRec(root.left) + 1 }
-    if (root.right && root.left) { return Math.min(minDepthRec(root.left), minDepthRec(root.right)) + 1 }
-}
-
-console.log(minDepthRec(a))
-
-
+console.log(maxTest(a))

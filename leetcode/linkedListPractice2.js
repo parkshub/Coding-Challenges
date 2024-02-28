@@ -1,3 +1,5 @@
+// Basic Linked List Problems
+
 class Node {
     constructor (value) {
         this.val = value
@@ -40,7 +42,7 @@ class LinkedList {
 
     traverse(head) {
         if (head === null) { return }
-        console.log(head.val)
+        // console.log(head.val)
         this.traverse(head.next)
 
         // let current = this.head
@@ -84,8 +86,8 @@ class LinkedList {
 
             if (currentIndex+1 == index) {
 
-                console.log(currentIndex)
-                console.log(this.head)
+                // console.log(currentIndex)
+                // console.log(this.head)
 
                 const next = current.next
                 node.next = next
@@ -95,7 +97,7 @@ class LinkedList {
             }
 
             current = current.next
-            console.log(current)
+            // console.log(current)
             currentIndex += 1
         }
 
@@ -103,16 +105,71 @@ class LinkedList {
 }
 
 const list = new LinkedList()
-// console.log('list is empty', list.isEmpty())
-// console.log('list size', list.getSize())
 
-list.prepend(10)
-list.prepend(20)
 list.prepend(30)
-
 list.append(50)
-// list.print()
-
 list.insert(100, 1)
 
-console.log(JSON.stringify(list.head))
+
+// Intersection of Two Linked Lists
+
+// a1 - a2
+                // c1 - c2 - c3
+// b1 - b2 - b3
+
+var getIntersectionNode = function(headA, headB) {
+    const set = new Set()
+
+    while (headA) {
+        set.add(headA)
+        headA = headA.next
+    }
+
+    while (headB) {
+        if (set.has(headB)) { 
+            console.log(headB)
+            return headB }
+        headB = headB.next
+    }
+
+    return null
+};
+
+// Floyd's Tortiuse and Hare
+// if there exists a cycle or not
+// the solution happens in linear time complexity
+
+// 3 - 2 - 0 - -4 --> 2 - 0 - -4
+
+var hasCycle = function(head) {
+
+    let slow = head
+    let fast = head
+
+    while (fast && fast.next) {
+        slow = slow.next
+        fast = fast.next.next
+
+        if (slow === fast) {
+            return true
+        }
+    }
+
+    return false
+};
+
+function maximumProfit(prices) {
+    const n = prices.length;
+    let profit = 0;
+    let minPrice = prices[0];
+
+    for (let i = 1; i < n; ++i) {
+        if (prices[i] < minPrice) {
+            minPrice = prices[i];
+        } else {
+            profit = Math.max(profit, prices[i] - minPrice);
+        }
+    }
+
+    return profit;
+}

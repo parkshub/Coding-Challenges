@@ -19,6 +19,19 @@ class Node {
   b.right = e
   c.right = f
 
+  let aa = new Node(2)
+  let bb = new Node(4)
+  let cc = new Node(1)
+  let dd = new Node(3)
+  let ee = new Node(6)
+  let ff = new Node(2)
+  
+  aa.left = bb
+  aa.right = cc
+  bb.left = dd
+  bb.right = ee
+  cc.right = ff
+
 //           a
 //          / \
 //         b   c
@@ -44,7 +57,6 @@ function maxRootPathV2(root) {
     return Math.max(root.val + left, root.val + right)
 }
 
-
 function treeMinV1(root) {
     
     if(root === null) return [];
@@ -59,8 +71,6 @@ function treeMinV1(root) {
     
     return helper(root)
 }
-
-
 
 function treeSumV1(root) {
     if (root === null) return 0;
@@ -102,7 +112,6 @@ function includesV2(root, target) {
     if (root.val === target) return true;
     return includes(root.left, target) || includes(root.right, target)
 }
-
 
 var inorderTraversal = function(root) {
     // left root right
@@ -146,3 +155,59 @@ var postorderTraversal = function(root) {
 
     return arr.reverse()
 };
+
+function sameTree(treeA, treeB) {
+    
+    let queue = [ treeA, treeB ]
+
+    while (queue.length) {
+        let a = queue.shift()
+        let b = queue.shift()
+
+        if (!a && !b) { continue }
+
+        if ((!a && b) || (a && !b) || a.val !== b.val) {
+            return false
+        }
+
+        queue.push(a.left)
+        queue.push(b.left)
+        queue.push(a.right)
+        queue.push(b.right)
+    }
+
+    return true
+}
+
+const hasPathSum = (head, value) => {
+    if (!head) { return false }
+
+    let stack = [ [ head, 0 ] ]
+    let sumsList = [ ]
+
+    while (stack.length) {
+        let [ current, sum ] = stack.pop()
+        if (!current.left && !current.right) { 
+            sumsList.push(sum + current.val) 
+            continue
+        }
+        if (current.left) { 
+            stack.push([ current.left, current.val + sum ])
+        }
+        if (current.right) { 
+            stack.push([ current.right, current.val + sum ])
+        }
+
+    }
+
+    return sumsList.includes(value)
+}
+
+const maxPath = (head) => {
+    if (head === null) { return 0 }
+
+    if (!head.left) { return maxPath(head.right) + head.val}
+    if (!head.right) { return maxPath(head.left) + head.val}
+    // just change this part to min if you're looking for a minimum
+    return Math.max(maxPath(head.right), maxPath(head.left)) + head.val
+}
