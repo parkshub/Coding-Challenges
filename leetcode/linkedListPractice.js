@@ -153,4 +153,19 @@ const zipperList = (head1, head2) => {
     return head1
 }
 
-console.log(JSON.stringify(zipperList(a, a2)))
+
+
+
+function reverseListPractice(head) {
+    let prev = null
+    let current = head
+
+    while (current) {
+        let next = current.next
+        current.next = prev
+        prev = current
+        current = next
+    }
+
+    return prev
+}

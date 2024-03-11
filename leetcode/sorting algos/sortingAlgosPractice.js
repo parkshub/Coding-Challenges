@@ -123,70 +123,67 @@ const arr2 = [8, 20, -2, 4, -6]
 //     }
 
 //     return [...quickSort(left), pivot, ...quickSort(right)]
-// }
 
 
-
+// remember binary search you're returning the index value so you need to keep track of that
 function binarySearch(arr, target) {
     let left = 0
     let right = arr.length - 1
 
-    while (left > right) {
+    while (left <= right) {
         let mid = Math.floor((left + right) / 2)
 
-        if (arr[mid] === target) { return mid }
 
-        if (arr[mid] > target) { right = mid - 1 }
-        if (arr[mid] <= target) { left = mid + 1 }
+        if (arr[mid] === target) {
+            return mid
+        }
+
+        if (arr[mid] > target) {
+            right = mid - 1
+        } else {
+            left = mid + 1
+        }
     }
 
     return -1
 }
 
-function binarySearchRec(arr, target, left, right) {
-    if (left > right) { return - 1 }
+function binarySearchRec(left, right, arr, target) {
+    if (left > right || !arr.length) { return - 1 }
+    console.log('first')
 
-    const mid = Math.floor((left + right) / 2)
-    
+    let mid = Math.floor((left + right) / 2)
+
     if (arr[mid] === target) { return mid }
 
-    if (arr[mid] > target) { return binarySearchRec(arr, target, left, mid - 1) }
-    if (arr[mid] < target) { return binarySearchRec(arr, target, mid + 1, right) }
+    if (arr[mid] > target) { return binarySearch1(left, mid - 1, arr, target) }
+    if (arr[mid] < target) { return binarySearch1(mid + 1, right, arr, target) }
 }
 
-function bubbleSort(arr) {
-    let condition = true
+function mergeSort(arr) {
+    if (arr.length < 2) { return arr }
 
-    while (condition) {
-        condition = false
+    let mid = Math.floor(arr.length / 2)
+    let left = arr.slice(0, mid)
+    let right = arr.slice(mid)
 
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[ i ] > arr[ i + 1 ]) { 
-                let temp = arr[i]
-                arr[i] = arr[i + 1]
-                arr[i + 1] = temp
+    function merge(left, right) {
+        let sortedArr = []
 
-                condition = true
-             }
+        console.log(left, right)
+
+        while (left.length && right.length) {
+            // this is how you do for descending order
+            // using slices in loops give iffy results so avoid them if possible
+            if (left[ 0 ] > right[ 0 ]) {
+                sortedArr.push(left.shift())
+            } else {
+                sortedArr.push(right.shift())
+            }
         }
+
+        return [...sortedArr, ...left, ...right]
     }
 
-    return arr
-}
-
-function insertionSort(arr) {
-
-    for (let i = 1; i < arr.length; i++) {
-        let num = arr[i]
-        let j = i - 1
-
-        
-        while (j >= 0 & num < arr[j]) {
-            arr[j + 1] = arr[j]
-            j--
-        }
-        arr[j + 1] = num
-    }
-
-    return arr
+    return merge(mergeSort(left), mergeSort(right))
 }
