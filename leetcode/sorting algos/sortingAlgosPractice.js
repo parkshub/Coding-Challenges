@@ -187,3 +187,80 @@ function mergeSort(arr) {
 
     return merge(mergeSort(left), mergeSort(right))
 }
+
+function insertionSort(arr) {
+    for (let i = 1; i < arr.length; i++) {
+        let num = arr[i]
+        let j = i - 1
+        
+        while (j >=0 & num < arr[j]) {
+            arr[j + 1] = arr[j]
+            j--
+        }
+
+        arr[j + 1] = num
+    }
+
+    return arr
+}
+
+function bubbleSort(arr) {
+    let sorted
+    while (sorted !== false) {
+        sorted = false
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] > arr[i + 1]) {
+                let temp = arr[i]
+                arr[i] = arr[i + 1]
+                arr[i + 1] = temp
+                sorted = true
+            }
+        }
+    }
+
+    return arr
+}
+
+function quicksort(arr) {
+    if (arr.length < 2) { return arr }
+
+    let pivot = arr[arr.length - 1]
+    let left = []
+    let right = []
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] < pivot) { left.push(arr[i]) }
+        if (arr[i] > pivot) { right.push(arr[i]) }
+    }
+
+    return [...quicksort(left), pivot, ...quicksort(right)]
+ }
+
+function mergesort(arr) {
+    if (arr.length < 2) { return arr }
+    
+    let mid = Math.floor(arr.length/ 2)
+
+    let left = arr.slice(0, mid) 
+    let right = arr.slice(mid)
+
+    return merge(mergesort(left), mergesort(right))
+
+    function merge(left, right) {
+        let sortedArr = []
+
+        while (left.length && right.length) {
+            if (left[left.length - 1] > right[right.length - 1]) {
+                sortedArr.unshift(left.pop())
+                sortedArr.unshift(left.pop())
+            } else {
+                sortedArr.unshift(right.pop())
+            }
+        }
+
+        // return [...sortedArr, ...left, ...right]
+        return [...left, ...right, ...sortedArr]
+    }
+}
+
+console.log(mergesort(arr2))
